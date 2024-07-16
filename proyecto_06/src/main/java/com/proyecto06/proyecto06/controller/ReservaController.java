@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.tienda.Tienda.controller;
+package com.proyecto06.proyecto06.controller;
 
 
 
-import com.tienda.Tienda.domain.Reserva;
-import com.tienda.Tienda.services.ReservaService;
-import com.tienda.Tienda.services.FirebaseStorageService;
+import com.proyecto06.proyecto06.domain.Reserva;
+import com.proyecto06.proyecto06.services.ReservaService;
+import com.proyecto06.proyecto06.services.FirebaseStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

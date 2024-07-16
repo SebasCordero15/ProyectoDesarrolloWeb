@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package com.tienda.Tienda.services;
+package com.proyecto06.proyecto06.services;
 
-import com.tienda.Tienda.domain.Reserva;
+import com.proyecto06.proyecto06.domain.Reserva;
 import java.util.List;
 
 
