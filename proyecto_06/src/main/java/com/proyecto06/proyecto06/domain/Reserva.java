@@ -20,8 +20,9 @@ public class Reserva implements Serializable {
     
     private Long idReserva;
     
+    private String id_vuelo;
     private String descripcion;
-    private String rutaImagen;
-    private boolean activo;
+    private String fecha_reserva;
+    private boolean Estado;
     
 }

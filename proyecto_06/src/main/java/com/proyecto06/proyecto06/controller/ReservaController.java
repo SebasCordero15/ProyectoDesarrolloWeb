@@ -35,21 +35,21 @@ public class ReservaController {
         
     }
     @Autowired
-    private FirebaseStorageService firebasStorageService;
-    @PostMapping("/guardar")
-    public String guardar(Reserva reserva,
-            @RequestParam MultipartFile imagenFile) {
-        if (!imagenFile.isEmpty()){
+    //private FirebaseStorageService firebasStorageService;
+    //@PostMapping("/guardar")
+    //public String guardar(Reserva reserva,
+           // @RequestParam MultipartFile imagenFile) {
+       // if (!imagenFile.isEmpty()){
             //se sube la imagen al Storage
-            reservaService.save(reserva);
-            String rutaImagen=firebasStorageService.cargaImagen(imagenFile,
-                    "reserva", reserva.getIdReserva());
-            reserva.setRutaImagen(rutaImagen);
+          //  reservaService.save(reserva);
+          //  String rutaImagen=firebasStorageService.cargaImagen(imagenFile,
+           //         "reserva", reserva.getIdReserva());
+           // reserva.setRutaImagen(rutaImagen);
             
-        }
-        reservaService.save(reserva);
-        return"redirect:/reserva/listado";
-    }
+       // }
+       // reservaService.save(reserva);
+       // return"redirect:/reserva/listado";
+    //}//
     @GetMapping("/eliminar/{idReserva}")
     public String eliminar (Reserva reserva) {
         reservaService.delete(reserva);

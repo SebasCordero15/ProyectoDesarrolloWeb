@@ -22,7 +22,7 @@ public class ReservaServiceImpl implements ReservaService {
         var lista = reservaDao.findAll();
         
         if(activos) { //elimina inactivos
-           lista.removeIf(c -> !c.isActivo());
+           lista.removeIf(c -> !c.isEstado());
         }
         
         return lista;
