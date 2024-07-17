@@ -19,7 +19,7 @@ public class VuelosServiceImpl implements VuelosService {
         var lista = vuelosDao.findAll();
         
         if(activos) { //elimina inactivos
-           lista.removeIf(c -> !c.isEstado());
+           lista.removeIf(c -> !c.isActivo());
         }
         
         return lista;
