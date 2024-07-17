@@ -19,17 +19,9 @@ public class Reserva implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReserva;
-    private Long idPasajero;
     private Long idVuelo;
-    private LocalDateTime fechaReserva;
+    private String descripcion;
     private String rutaImagen;
-    private boolean estado;
+    private boolean activo;
  
-    
-
-    public enum EstadoReserva {
-        Pendiente,
-        Confirmada,
-        Cancelada
-    }
 }
