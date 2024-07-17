@@ -24,4 +24,7 @@ public class Reserva implements Serializable {
     private String rutaImagen;
     private boolean activo;
  
+    @ManyToOne
+    @JoinColumn(name = "id_vuelo")
+    private Vuelos vuelos;
 }

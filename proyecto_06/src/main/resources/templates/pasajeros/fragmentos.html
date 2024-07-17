@@ -19,17 +19,17 @@
                             type="button" 
                             class="btn btn-primary btn-block" 
                             data-bs-toggle="modal" 
-                            data-bs-target="#agregarReserva">
-                            <i class="fas fa-plus"></i> [[#{reserva.agregar}]]
+                            data-bs-target="#agregarPasajeros">
+                            <i class="fas fa-plus"></i> [[#{pasajeros.agregar}]]
                         </button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 2 Fragmento para agregar reserva, es la ventana modal -->
-        <section th:fragment="agregarReserva">
-            <div id="agregarReserva" 
+        <!-- 2 Fragmento para agregar pasajeros, es la ventana modal -->
+        <section th:fragment="agregarPasajeros">
+            <div id="agregarPasajeros" 
                  class="modal fade" 
                  tabindex="-1" 
                  aria-labelledby="exampleModalLabel" 
@@ -37,32 +37,39 @@
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
                         <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title">[[#{reserva.agregar}]]</h5>
+                            <h5 class="modal-title">[[#{pasajeros.agregar}]]</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/reserva/guardar}" th:object="${reserva}"
+                        <form th:action="@{/pasajeros/guardar}" th:object="${pasajeros}"
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{reserva.idReserva}]]</label>
+                                    <label for="descripcion">[[#{pasajeros.idVuelo}]]</label>
                                     <input type="text" class="form-control" name="id_Reserva" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{reserva.idVuelo}]]</label>
+                                    <label for="descripcion">[[#{pasajeros.codigoVuelo}]]</label>
+                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                </div>
+                                 <div class="mb-3">
+                                    <label for="descripcion">[[#{pasajeros.origen}]]</label>
+                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                </div>
+                                 <div class="mb-3">
+                                    <label for="descripcion">[[#{pasajeros.destino}]]</label>
+                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                </div>
+                                 <div class="mb-3">
+                                    <label for="descripcion">[[#{pasajeros.fechaSalida}]]</label>
+                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                </div>
+                                 <div class="mb-3">
+                                    <label for="descripcion">[[#{pasajeros.fechaLlegada}]]</label>
                                     <input type="text" class="form-control" name="id_vuelo" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{reserva.descripcion}]]</label>
-                                    <input type="text" class="form-control" name="descripcion" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="activo">[[#{reserva.activo}]]</label>
+                                    <label for="activo">[[#{pasajeros.activo}]]</label>
                                     <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="imagen">[[#{reserva.rutaImagen}]]</label>
-                                    <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);"/>
-                                    <img id="blah" src="#" alt="your image" height="200"/>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -74,41 +81,44 @@
             </div>
         </section>
 
-        <!-- 3 Sección principal para mostrar la informaccion de la entidad reserva -->
-        <section th:fragment="listadoReservas" id="reservas">
+        <!-- 3 Sección principal para mostrar la informaccion de la entidad pasajeros -->
+        <section th:fragment="listadoPasajeros" id="reservas">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card">
                             <div class="card-header">
-                                <h4>[[#{reserva.listado}]]</h4>
+                                <h4>[[#{pasajeros.listado}]]</h4>
                             </div>
-                            <div th:if="${reservas != null and !reservas.empty}">
+                            <div th:if="${pasajeross != null and !pasajeross.empty}">
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark">
                                         <tr><th>#</th>
-                                            <th>[[#{reserva.idReserva}]]</th>
-                                            <th>[[#{reserva.idVuelo}]]</th>
-                                            <th>[[#{reserva.descripcion}]]</th>
-                                            <th>[[#{reserva.activo}]]</th>
-                                             <th>[[#{reserva.vuelo.codigoVuelo}]]</th>
+                                            <th>[[#{pasajeros.idPasajero}]]</th>
+                                            <th>[[#{pasajeros.nombre}]]</th>
+                                            <th>[[#{pasajeros.apellido}]]</th>
+                                            <th>[[#{pasajeros.email}]]</th>
+                                            <th>[[#{pasajeros.telefono}]]</th>
+                                            <th>[[#{pasajeros.fechaNaciomiento}]]</th>
+                                            <th>[[#{pasajeros.nacionalidad}]]</th>
+                                        
                                             <th></th></tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="reserva, contador : ${reservas}">
+                                        <tr th:each="pasajeros, contador : ${pasajeross}">
                                             <td>[[${contador.count}]]</td>
-                                            <td>[[${reserva.descripcion}]]</td>
-                                            <td th:text="${reserva.activo} ? 'Activa' : 'Inactiva'" />
-                                            <td><a th:href="@{/reserva/eliminar/}+${reserva.idReserva}"
+                                            <td>[[${pasajeros.origen}]]</td>
+                                            <td th:text="${pasajeros.activo} ? 'Activa' : 'Inactiva'" />
+                                            <td><a th:href="@{/pasajeros/eliminar/}+${pasajeros.idVuelo}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
-                                                <a th:href="@{/reserva/modificar/}+${reserva.idReserva}"
+                                                <a th:href="@{/pasajeros/modificar/}+${pasajeros.idVuelo}"
                                                    class="btn btn-success">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="text-center p-2" th:if="${reservas == null or reservas.empty}">
+                            <div class="text-center p-2" th:if="${pasajeross == null or pasajeross.empty}">
                                 <span>[[#{lista.vacia}]]</span>
                             </div>
                         </div>
@@ -116,8 +126,8 @@
                     <div class="col-md-3">
                         <div class="card text-center bg-success text-white mb-3">
                             <div class="card-body">
-                                <h3>[[#{reserva.total}]]</h3>
-                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${TotalReservas}]]</h4>
+                                <h3>[[#{pasajeros.total}]]</h3>
+                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${TotalPasajeros}]]</h4>
                             </div>
                         </div>
                     </div>
@@ -126,18 +136,17 @@
         </section>
 
         <!-- 4 Fragmento que se utiliza en la página modifca.html -->
-        <section th:fragment="editarReserva">
+        <section th:fragment="editarPasajeros">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <form method="POST"
-                          th:action="@{/reserva/guardar}" 
-                          th:object="${reserva}"
+                          th:action="@{/pasajeros/guardar}" 
+                          th:object="${pasajeros}"
                           class="was-validated"                          
                           enctype="multipart/form-data">
-                        <input type="hidden" name="idReserva" th:field="*{idReserva}"/>
-                        <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>
-                        <section th:replace="~{reserva/fragmentos :: botonesEditar}"/>
+                        <input type="hidden" name="idVuelo" th:field="*{idVuelo}"/>
+                        <section th:replace="~{pasajeros/fragmentos :: botonesEditar}"/>
                         <div id=details>
                             <div class="container">
                                 <div class="row">
@@ -148,36 +157,48 @@
                                             </div>
                                             <div class="card-body">
                                                  <div class="mb-3">
-                                                    <label for="descripcion">[[#{reserva.idReserva}]]</label>
+                                                    <label for="descripcion">[[#{pasajeros.idVuelo}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                  <div class="mb-3">
-                                                    <label for="descripcion">[[#{reserva.idVuelo}]]</label>
+                                                    <label for="descripcion">[[#{pasajeros.codigoVuelo}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{reserva.descripcion}]]</label>
+                                                    <label for="descripcion">[[#{pasajeros.origen}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="activo">[[#{reserva.activo}]]</label>
+                                                    <label for="descripcion">[[#{pasajeros.destino}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="descripcion" th:field="*{descripcion}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="descripcion">[[#{pasajeros.fechaSalida}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="descripcion" th:field="*{descripcion}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="descripcion">[[#{pasajeros.fechaLlegada}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="descripcion" th:field="*{descripcion}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="activo">[[#{pasajeros.activo}]]</label>
                                                     <input class="form-check-input" 
                                                            type="checkbox" 
                                                            name="activo" 
                                                            id="activo"
                                                            th:field="*{activo}">
-                                                </div>
-                                                 <div class="mb-3">
-                                                    <label for="imagen">[[#{reserva.rutaImagen}]]</label>
-                                                    <input class="form-control" type="file" name="imagenFile"
-                                                           onchange="readURL(this);" />
-                                                    <img id="blah" th:src="@{${reserva.rutaImagen}}" alt="your image" height="200"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -194,12 +215,12 @@
             <div class="container py-4 mb-4 bg-light">
                 <div class="row">
                     <div class="col-md-4 d-grid">
-                        <a th:href="@{/reserva/listado}" class="btn btn-primary">
+                        <a th:href="@{/pasajeros/listado}" class="btn btn-primary">
                             <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
                         </a>
                     </div>
                     <div class="col-md-4 d-grid">                                
-                        <a th:href="@{/reserva/eliminar/}+${reserva.idReserva}"
+                        <a th:href="@{/pasajeros/eliminar/}+${pasajeros.idPasajeros}"
                            class="btn btn-danger">
                             <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                         </a>
