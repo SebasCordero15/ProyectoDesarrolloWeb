@@ -27,7 +27,7 @@ public class VuelosServiceImpl implements VuelosService{
 
     @Override
     public Vuelos getVuelos(Vuelos vuelos) {
-        return vuelosDao.findById(vuelos.getIdVuelos()).orElse(null);
+        return vuelosDao.findById(vuelos.getIdVuelo()).orElse(null);
     }
 
     @Override
