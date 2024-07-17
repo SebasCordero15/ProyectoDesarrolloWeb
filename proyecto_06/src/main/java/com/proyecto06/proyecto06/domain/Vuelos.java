@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="Vuelos")//No sé que nombre de tabla poner acá 
+@Table(name="vuelos")
 public class Vuelos {
     private static final long serialVersionUID = 1l;
     
@@ -24,5 +24,8 @@ public class Vuelos {
     private String destino;
     private Date fechaSalida; 
     private Date fechaLlegada;
+    private double precio;
+    private boolean estado;
+    private String rutaImagen;
   
 }

@@ -6,23 +6,30 @@ package com.proyecto06.proyecto06.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name="reserva")
+@Table(name="reservas")
 public class Reserva implements Serializable {
     
     private static final long serialVersionUID = 1l;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
     private Long idReserva;
+    private Long idPasajero;
+    private Long idVuelo;
+    private LocalDateTime fechaReserva;
+    private String rutaImagen;
+    private boolean estado;
+ 
     
-    private String id_vuelo;
-    private String descripcion;
-    private String fecha_reserva;
-    private boolean Estado;
-    
+
+    public enum EstadoReserva {
+        Pendiente,
+        Confirmada,
+        Cancelada
+    }
 }
