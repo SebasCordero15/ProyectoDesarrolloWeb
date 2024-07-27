@@ -4,12 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http//www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}"
-        <title>Proyecto06</title>
+          <title>Proyecto06</title>
         <meta charset="UTF-8"/> 
-      
+
     </head>
     <body>
-        
+
         <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
         <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
             <div class="container">
@@ -44,40 +44,50 @@
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{pasajeros.idVuelo}]]</label>
-                                    <input type="text" class="form-control" name="id_Reserva" required="true"/>
+                                    <label for="descripcion">[[#{pasajeros.idPago}]]</label>
+                                    <input type="text" class="form-control" name="id_pasajero" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{pasajeros.codigoVuelo}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
-                                </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{pasajeros.origen}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
-                                </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{pasajeros.destino}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
-                                </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{pasajeros.fechaSalida}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
-                                </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{pasajeros.fechaLlegada}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                    <label for="descripcion">[[#{pasajeros.nombre}]]</label>
+                                    <input type="text" class="form-control" name="id_pago" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="activo">[[#{pasajeros.activo}]]</label>
-                                    <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
+                                    <label for="descripcion">[[#{pasajeros.apellido}]]</label>
+                                    <input type="text" class="form-control" name="id_pago" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="descripcion">[[#{pasajeros.email}]]</label>
+                                    <input type="text" class="form-control" name="id_pago" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="descripcion">[[#{pasajeros.telefono}]]</label>
+                                    <input type="text" class="form-control" name="id_pago" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="descripcion">[[#{pasajeros.fechaNacimiento}]]</label>
+                                    <input type="text" class="form-control" name="id_pago" required="true"/>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            <div class="mb-3">
+                                <label for="descripcion">[[#{pasajeros.nacionalidad}]]</label>
+                                <input type="text" class="form-control" name="id_pago" required="true"/>
+                            </div>                                
+                            <div class="mb-3">
+                                <label for="activo">[[#{pasajeros.activo}]]</label>
+                                <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
                             </div>
-                        </form>
+                            <div class="mb-3">
+                                <label for="imagen">[[#{pasajeros.rutaImagen}]]</label>
+                                <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);"/>
+                                <img id="blah" src="#" alt="your image" height="200"/>
+                            </div>
                     </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+                    </form>
                 </div>
+            </div>
             </div>
         </section>
 
@@ -101,7 +111,7 @@
                                             <th>[[#{pasajeros.telefono}]]</th>
                                             <th>[[#{pasajeros.fechaNaciomiento}]]</th>
                                             <th>[[#{pasajeros.nacionalidad}]]</th>
-                                        
+
                                             <th></th></tr>
                                     </thead>
                                     <tbody>
@@ -109,10 +119,10 @@
                                             <td>[[${contador.count}]]</td>
                                             <td>[[${pasajeros.origen}]]</td>
                                             <td th:text="${pasajeros.activo} ? 'Activa' : 'Inactiva'" />
-                                            <td><a th:href="@{/pasajeros/eliminar/}+${pasajeros.idVuelo}"
+                                            <td><a th:href="@{/pasajeros/eliminar/}+${pasajeros.idPago}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
-                                                <a th:href="@{/pasajeros/modificar/}+${pasajeros.idVuelo}"
+                                                <a th:href="@{/pasajeros/modificar/}+${pasajeros.idPago}"
                                                    class="btn btn-success">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>
                                     </tbody>
@@ -145,7 +155,7 @@
                           th:object="${pasajeros}"
                           class="was-validated"                          
                           enctype="multipart/form-data">
-                        <input type="hidden" name="idVuelo" th:field="*{idVuelo}"/>
+                        <input type="hidden" name="idPago" th:field="*{idPago}"/>
                         <section th:replace="~{pasajeros/fragmentos :: botonesEditar}"/>
                         <div id=details>
                             <div class="container">
@@ -156,42 +166,48 @@
                                                 <h4>[[#{accion.actualizar}]]</h4>
                                             </div>
                                             <div class="card-body">
-                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{pasajeros.idVuelo}]]</label>
-                                                    <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
-                                                           required="true">
-                                                </div>
-                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{pasajeros.codigoVuelo}]]</label>
+                                                <div class="mb-3">
+                                                    <label for="descripcion">[[#{pasajeros.idPasajero}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{pasajeros.origen}]]</label>
+                                                    <label for="descripcion">[[#{pasajeros.nombre}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{pasajeros.destino}]]</label>
+                                                    <label for="descripcion">[[#{pasajeros.apellido}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{pasajeros.fechaSalida}]]</label>
+                                                    <label for="descripcion">[[#{pasajeros.email}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{pasajeros.fechaLlegada}]]</label>
+                                                    <label for="descripcion">[[#{pasajeros.telefono}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
+                                                <div class="mb-3">
+                                                    <label for="descripcion">[[#{pasajeros.fechaNacimiento}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="descripcion" th:field="*{descripcion}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="descripcion">[[#{pasajeros.nacionalidad}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="descripcion" th:field="*{descripcion}"
+                                                           required="true">
+                                                </div>                                                
                                                 <div class="mb-3">
                                                     <label for="activo">[[#{pasajeros.activo}]]</label>
                                                     <input class="form-check-input" 
@@ -199,6 +215,12 @@
                                                            name="activo" 
                                                            id="activo"
                                                            th:field="*{activo}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="imagen">[[#{pasajeros.rutaImagen}]]</label>
+                                                    <input class="form-control" type="file" name="imagenFile"
+                                                           onchange="readURL(this);" />
+                                                    <img id="blah" th:src="@{${pasajeros.rutaImagen}}" alt="your image" height="200"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -233,6 +255,6 @@
                 </div>
             </div>
         </section>
-       
+
     </body>
 </html>

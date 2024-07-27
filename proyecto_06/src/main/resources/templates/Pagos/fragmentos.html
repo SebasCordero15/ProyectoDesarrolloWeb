@@ -4,12 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http//www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}"
-        <title>Proyecto06</title>
+          <title>Proyecto06</title>
         <meta charset="UTF-8"/> 
-      
+
     </head>
     <body>
-        
+
         <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
         <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
             <div class="container">
@@ -44,28 +44,25 @@
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{pagos.idVuelo}]]</label>
-                                    <input type="text" class="form-control" name="id_Reserva" required="true"/>
+                                    <label for="descripcion">[[#{pagos.idPago}]]</label>
+                                    <input type="text" class="form-control" name="id_pago" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{pagos.codigoVuelo}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                    <label for="descripcion">[[#{pagos.metodoPago}]]</label>
+                                    <input type="text" class="form-control" name="id_pago" required="true"/>
                                 </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{pagos.origen}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                <div class="mb-3">
+                                    <label for="descripcion">[[#{pagos.monto}]]</label>
+                                    <input type="text" class="form-control" name="id_pago" required="true"/>
                                 </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{pagos.destino}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                <div class="mb-3">
+                                    <label for="descripcion">[[#{pagos.fechaPago}]]</label>
+                                    <input type="text" class="form-control" name="id_pago" required="true"/>
                                 </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{pagos.fechaSalida}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
-                                </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{pagos.fechaLlegada}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                <div class="mb-3">
+                                    <label for="imagen">[[#{pagos.rutaImagen}]]</label>
+                                    <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);"/>
+                                    <img id="blah" src="#" alt="your image" height="200"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="activo">[[#{pagos.activo}]]</label>
@@ -98,7 +95,7 @@
                                             <th>[[#{pagos.metodoPago}]]</th>
                                             <th>[[#{pagos.monto}]]</th>
                                             <th>[[#{pagos.fechaPago}]]</th>
-                                             <th>[[#{pagos.reserva.descripcion}]]</th>
+                                            <th>[[#{pagos.reserva.descripcion}]]</th>
                                             <th></th></tr>
                                     </thead>
                                     <tbody>
@@ -106,10 +103,10 @@
                                             <td>[[${contador.count}]]</td>
                                             <td>[[${pagos.origen}]]</td>
                                             <td th:text="${pagos.activo} ? 'Activa' : 'Inactiva'" />
-                                            <td><a th:href="@{/pagos/eliminar/}+${pagos.idVuelo}"
+                                            <td><a th:href="@{/pagos/eliminar/}+${pagos.idPago}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
-                                                <a th:href="@{/pagos/modificar/}+${pagos.idVuelo}"
+                                                <a th:href="@{/pagos/modificar/}+${pagos.idPago}"
                                                    class="btn btn-success">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>
                                     </tbody>
@@ -142,7 +139,7 @@
                           th:object="${pagos}"
                           class="was-validated"                          
                           enctype="multipart/form-data">
-                        <input type="hidden" name="idVuelo" th:field="*{idVuelo}"/>
+                        <input type="hidden" name="idPago" th:field="*{idPago}"/>
                         <section th:replace="~{pagos/fragmentos :: botonesEditar}"/>
                         <div id=details>
                             <div class="container">
@@ -153,42 +150,37 @@
                                                 <h4>[[#{accion.actualizar}]]</h4>
                                             </div>
                                             <div class="card-body">
-                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{pagos.idVuelo}]]</label>
-                                                    <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
-                                                           required="true">
-                                                </div>
-                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{pagos.codigoVuelo}]]</label>
+                                                <div class="mb-3">
+                                                    <label for="descripcion">[[#{pagos.idPago}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{pagos.origen}]]</label>
+                                                    <label for="descripcion">[[#{pagos.metodoPago}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{pagos.destino}]]</label>
+                                                    <label for="descripcion">[[#{pagos.monto}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{pagos.fechaSalida}]]</label>
+                                                    <label for="descripcion">[[#{pagos.fechaPago}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{pagos.fechaLlegada}]]</label>
-                                                    <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
-                                                           required="true">
+                                                    <label for="imagen">[[#{pagos.rutaImagen}]]</label>
+                                                    <input class="form-control" type="file" name="imagenFile"
+                                                           onchange="readURL(this);" />
+                                                    <img id="blah" th:src="@{${pasajeros.rutaImagen}}" alt="your image" height="200"/>
                                                 </div>
+
                                                 <div class="mb-3">
                                                     <label for="activo">[[#{pagos.activo}]]</label>
                                                     <input class="form-check-input" 
@@ -230,6 +222,6 @@
                 </div>
             </div>
         </section>
-       
+
     </body>
 </html>

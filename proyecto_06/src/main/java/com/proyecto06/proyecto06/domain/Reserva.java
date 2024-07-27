@@ -19,7 +19,7 @@ public class Reserva implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReserva;
-    private Long idVuelo;
+    //private Long idVuelo;
     private String descripcion;
     private String rutaImagen;
     private boolean activo;

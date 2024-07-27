@@ -44,28 +44,16 @@
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{checkin.idVuelo}]]</label>
+                                    <label for="descripcion">[[#{checkin.idCheckin}]]</label>
                                     <input type="text" class="form-control" name="id_Reserva" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{checkin.codigoVuelo}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                    <label for="descripcion">[[#{checkin.fechaCheckin}]]</label>
+                                    <input type="text" class="form-control" name="id_checkin" required="true"/>
                                 </div>
                                  <div class="mb-3">
-                                    <label for="descripcion">[[#{checkin.origen}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
-                                </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{checkin.destino}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
-                                </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{checkin.fechaSalida}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
-                                </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{checkin.fechaLlegada}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                    <label for="descripcion">[[#{checkin.nacionalidad}]]</label>
+                                    <input type="text" class="form-control" name="id_checkin" required="true"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="activo">[[#{checkin.activo}]]</label>
@@ -105,10 +93,10 @@
                                             <td>[[${contador.count}]]</td>
                                             <td>[[${checkin.origen}]]</td>
                                             <td th:text="${checkin.activo} ? 'Activa' : 'Inactiva'" />
-                                            <td><a th:href="@{/checkin/eliminar/}+${checkin.idVuelo}"
+                                            <td><a th:href="@{/checkin/eliminar/}+${checkin.idCheckin}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
-                                                <a th:href="@{/checkin/modificar/}+${checkin.idVuelo}"
+                                                <a th:href="@{/checkin/modificar/}+${checkin.idCheckin}"
                                                    class="btn btn-success">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>
                                     </tbody>
@@ -141,7 +129,7 @@
                           th:object="${checkin}"
                           class="was-validated"                          
                           enctype="multipart/form-data">
-                        <input type="hidden" name="idVuelo" th:field="*{idVuelo}"/>
+                        <input type="hidden" name="idCheckin" th:field="*{idCheckin}"/>
                         <section th:replace="~{checkin/fragmentos :: botonesEditar}"/>
                         <div id=details>
                             <div class="container">
@@ -153,41 +141,24 @@
                                             </div>
                                             <div class="card-body">
                                                  <div class="mb-3">
-                                                    <label for="descripcion">[[#{checkin.idVuelo}]]</label>
+                                                    <label for="descripcion">[[#{checkin.idCheckin}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                  <div class="mb-3">
-                                                    <label for="descripcion">[[#{checkin.codigoVuelo}]]</label>
+                                                    <label for="descripcion">[[#{checkin.fechaCheckin}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{checkin.origen}]]</label>
+                                                    <label for="descripcion">[[#{checkin.nacionalidad}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="descripcion">[[#{checkin.destino}]]</label>
-                                                    <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
-                                                           required="true">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="descripcion">[[#{checkin.fechaSalida}]]</label>
-                                                    <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
-                                                           required="true">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="descripcion">[[#{checkin.fechaLlegada}]]</label>
-                                                    <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
-                                                           required="true">
-                                                </div>
+                                              
                                                 <div class="mb-3">
                                                     <label for="activo">[[#{checkin.activo}]]</label>
                                                     <input class="form-check-input" 

@@ -24,7 +24,8 @@ public class Vuelos {
     private String destino;
     private String fechaSalida; 
     private String fechaLlegada;
-    private boolean activo;
-    private String rutaImagen;
+    private double precio;
+   
+   
   
 }

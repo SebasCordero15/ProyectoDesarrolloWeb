@@ -15,14 +15,8 @@ public class VuelosServiceImpl implements VuelosService {
     private VuelosDao vuelosDao;
     
     @Override
-    public List<Vuelos> getVuelos(boolean activos) {
-        var lista = vuelosDao.findAll();
-        
-        if(activos) { //elimina inactivos
-           lista.removeIf(c -> !c.isActivo());
-        }
-        
-        return lista;
+    public List<Vuelos> getVuelos() {
+        return vuelosDao.findAll();
     }
 
     @Override
@@ -39,5 +33,6 @@ public class VuelosServiceImpl implements VuelosService {
     public void delete(Vuelos vuelos) {
         vuelosDao.delete(vuelos);
     }
-    
 }
+
+

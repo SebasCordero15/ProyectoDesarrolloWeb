@@ -34,22 +34,22 @@ public class ContactoController {
         return "/contacto/listado";
         
     }
-    @Autowired
-    private FirebaseStorageService firebasStorageService;
-    @PostMapping("/guardar")
-    public String guardar(Contacto contacto,
-            @RequestParam MultipartFile imagenFile) {
-        if (!imagenFile.isEmpty()){
-            //se sube la imagen al Storage
-            contactoService.save(contacto);
-            String rutaImagen=firebasStorageService.cargaImagen(imagenFile,
-                    "contacto", contacto.getIdContacto());
-            contacto.setRutaImagen(rutaImagen);
-            
-        }
-        contactoService.save(contacto);
-        return"redirect:/contacto/listado";
-    }
+//    @Autowired
+//    private FirebaseStorageService firebasStorageService;
+//    @PostMapping("/guardar")
+//    public String guardar(Contacto contacto,
+//            @RequestParam MultipartFile imagenFile) {
+//        if (!imagenFile.isEmpty()){
+//            //se sube la imagen al Storage
+//            contactoService.save(contacto);
+//            String rutaImagen=firebasStorageService.cargaImagen(imagenFile,
+//                    "contacto", contacto.getIdContacto());
+//            contacto.setRutaImagen(rutaImagen);
+//            
+//        }
+//        contactoService.save(contacto);
+//        return"redirect:/contacto/listado";
+//    }
     @GetMapping("/eliminar/{idContacto}")
     public String eliminar (Contacto contacto) {
         contactoService.delete(contacto);

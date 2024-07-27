@@ -23,7 +23,6 @@ public class Contacto {
     private String segundoNombre;
     private String email;
     private String mensaje; 
-    private String rutaImagen;
     private boolean activo;
 }
 

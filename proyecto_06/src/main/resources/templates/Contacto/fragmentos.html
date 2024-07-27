@@ -4,12 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http//www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}"
-        <title>Proyecto06</title>
+          <title>Proyecto06</title>
         <meta charset="UTF-8"/> 
-      
+
     </head>
     <body>
-        
+
         <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
         <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
             <div class="container">
@@ -44,28 +44,24 @@
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{contacto.idVuelo}]]</label>
-                                    <input type="text" class="form-control" name="id_Reserva" required="true"/>
+                                    <label for="descripcion">[[#{contacto.idContacto}]]</label>
+                                    <input type="text" class="form-control" name="id_contacto" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{contacto.codigoVuelo}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                    <label for="descripcion">[[#{contacto.nombre}]]</label>
+                                    <input type="text" class="form-control" name="id_contacto" required="true"/>
                                 </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{contacto.origen}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                <div class="mb-3">
+                                    <label for="descripcion">[[#{contacto.segundoNombre}]]</label>
+                                    <input type="text" class="form-control" name="id_contacto" required="true"/>
                                 </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{contacto.destino}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                <div class="mb-3">
+                                    <label for="descripcion">[[#{contacto.email}]]</label>
+                                    <input type="text" class="form-control" name="id_contacto" required="true"/>
                                 </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{contacto.fechaSalida}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
-                                </div>
-                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{contacto.fechaLlegada}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                <div class="mb-3">
+                                    <label for="descripcion">[[#{contacto.mensaje}]]</label>
+                                    <input type="text" class="form-control" name="id_contacto" required="true"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="activo">[[#{contacto.activo}]]</label>
@@ -99,7 +95,7 @@
                                             <th>[[#{contacto.segundoNombre}]]</th>
                                             <th>[[#{contacto.email}]]</th>
                                             <th>[[#{contacto.mensaje}]]</th>
-                                 
+
                                             <th></th></tr>
                                     </thead>
                                     <tbody>
@@ -107,10 +103,10 @@
                                             <td>[[${contador.count}]]</td>
                                             <td>[[${contacto.origen}]]</td>
                                             <td th:text="${contacto.activo} ? 'Activa' : 'Inactiva'" />
-                                            <td><a th:href="@{/contacto/eliminar/}+${contacto.idVuelo}"
+                                            <td><a th:href="@{/contacto/eliminar/}+${contacto.idContacto}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
-                                                <a th:href="@{/contacto/modificar/}+${contacto.idVuelo}"
+                                                <a th:href="@{/contacto/modificar/}+${contacto.idContacto}"
                                                    class="btn btn-success">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>
                                     </tbody>
@@ -143,7 +139,7 @@
                           th:object="${contacto}"
                           class="was-validated"                          
                           enctype="multipart/form-data">
-                        <input type="hidden" name="idVuelo" th:field="*{idVuelo}"/>
+                        <input type="hidden" name="idContacto" th:field="*{idContacto}"/>
                         <section th:replace="~{contacto/fragmentos :: botonesEditar}"/>
                         <div id=details>
                             <div class="container">
@@ -154,42 +150,37 @@
                                                 <h4>[[#{accion.actualizar}]]</h4>
                                             </div>
                                             <div class="card-body">
-                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{contacto.idVuelo}]]</label>
-                                                    <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
-                                                           required="true">
-                                                </div>
-                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{contacto.codigoVuelo}]]</label>
+                                                <div class="mb-3">
+                                                    <label for="descripcion">[[#{contacto.idContacto}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{contacto.origen}]]</label>
+                                                    <label for="descripcion">[[#{contacto.nombre}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{contacto.destino}]]</label>
+                                                    <label for="descripcion">[[#{contacto.segundoNombre}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{contacto.fechaSalida}]]</label>
+                                                    <label for="descripcion">[[#{contacto.email}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{contacto.fechaLlegada}]]</label>
+                                                    <label for="descripcion">[[#{contacto.mensaje}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
                                                            required="true">
                                                 </div>
+                                           
                                                 <div class="mb-3">
                                                     <label for="activo">[[#{contacto.activo}]]</label>
                                                     <input class="form-check-input" 
@@ -231,6 +222,6 @@
                 </div>
             </div>
         </section>
-       
+
     </body>
 </html>
