@@ -27,7 +27,7 @@ public class ContactoController {
     
     @GetMapping("/listado")
     public String listado(Model model){
-        var lista = contactoService.getContacto(false);
+        var lista = contactoService.getContacto();
         model.addAttribute("contacto", lista);
         model.addAttribute("totalContacto", lista.size());
         

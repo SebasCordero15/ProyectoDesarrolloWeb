@@ -7,9 +7,9 @@ public interface VuelosService {
 
     List<Vuelos> getVuelos();
 
-    Vuelos getVuelos(Vuelos vuelos);
+    public Vuelos getVuelos(Vuelos vuelos);
 
-    void save(Vuelos vuelos);
+    public void save(Vuelos vuelos);
 
-    void delete(Vuelos vuelos);
+    public void delete(Vuelos vuelos);
 }

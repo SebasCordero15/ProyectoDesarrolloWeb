@@ -10,7 +10,9 @@
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
     </head>
+     
 
     <body>
         
@@ -25,18 +27,18 @@
                         <ul class="navbar-nav">
                             <li class="nav-item px-2"><a class="nav-link" th:href="@{/reserva/listado}">[[#{plantilla.reservas}]]</a></li>
                             <li class="nav-item px-2"><a class="nav-link" th:href="@{/vuelos/listado}">[[#{plantilla.vuelos}]]</a></li>                           
-                             <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" 
                                    data-bs-toggle="dropdown" 
                                    href="#" 
                                    role="button" 
                                    aria-expanded="false">[[#{plantilla.pasajeros}]]</a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li><a class="dropdown-item"  th:href="@{/pruebas/listado}">[[#{plantilla.asociaciones}]]</a></li>
-                                    <li><a class="dropdown-item"  th:href="@{/pruebas/listado2}">[[#{plantilla.consultas}]]</a></li>
+                                    <li><a class="dropdown-item"  th:href="@{/contacto/listado}">[[#{plantilla.contacto}]]</a></li>
+                                    <li><a class="dropdown-item"  th:href="@{/checkin/listado}">[[#{plantilla.checkin}]]</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/usuario/listado}">[[#{plantilla.usuarios}]]</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/´pago/listado}">[[#{plantilla.pagos}]]</a></li>
                         </ul>
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
@@ -60,10 +62,10 @@
                 </div>
             </section>
         </header>
-        
+
         <footer th:fragment="footer">
             <h3>Este es el footer...</h3>
         </footer>
-       
+
     </body>
 </html>

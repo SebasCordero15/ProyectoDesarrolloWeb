@@ -6,9 +6,9 @@ import java.util.List;
 
 
 public interface ContactoService {
-    //se enuncia un metodo que recupera los registros de la tabla categorira
+    //se enuncia un metodo que recupera los registros de la tabla contacto
     //dentro de un arraylist, pueden ser todos los registros o solo los activos
-    public List<Contacto>getContacto(boolean activos);
+    public List<Contacto>getContacto();
     
     //Se obtiene un registro de la tabla contacto en un objeto contacto si el id
     //contacto existe, si no, se pasa un null
