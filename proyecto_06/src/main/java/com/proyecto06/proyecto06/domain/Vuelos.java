@@ -1,12 +1,9 @@
 
 package com.proyecto06.proyecto06.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import java.util.Date;
+import jakarta.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data

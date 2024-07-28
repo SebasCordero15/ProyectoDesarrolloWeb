@@ -32,22 +32,12 @@ public class VuelosController {
         return "/vuelos/listado";
     }
 
-//    @Autowired
-//    private FirebaseStorageService firebasStorageService;
-//    @PostMapping("/guardar")
-//    public String guardar(Vuelos vuelos,
-//            @RequestParam MultipartFile imagenFile) {
-//        if (!imagenFile.isEmpty()){
-//            //se sube la imagen al Storage
-//            vuelosService.save(vuelos);
-//            String rutaImagen=firebasStorageService.cargaImagen(imagenFile,
-//                    "vuelos", vuelos.getIdVuelo());
-//            vuelos.setRutaImagen(rutaImagen);
-//            
-//        }
-//        vuelosService.save(vuelos);
-//        return"redirect:/vuelos/listado";
-//    }
+    @PostMapping("/guardar")
+    public String guardar(Vuelos vuelos) {
+        vuelosService.save(vuelos);
+        return "redirect:/vuelos/listado";
+    }
+    
     @GetMapping("/eliminar/{idVuelos}")
     public String eliminar(Vuelos vuelos) {
         vuelosService.delete(vuelos);
