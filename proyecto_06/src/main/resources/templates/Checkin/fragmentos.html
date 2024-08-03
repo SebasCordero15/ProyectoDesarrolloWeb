@@ -44,21 +44,18 @@
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{checkin.idCheckin}]]</label>
-                                    <input type="text" class="form-control" name="id_Reserva" required="true"/>
+                                    <label for="idCheckin">[[#{checkin.idCheckin}]]</label>
+                                    <input type="text" class="form-control" name="idCheckin" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{checkin.fechaCheckin}]]</label>
-                                    <input type="text" class="form-control" name="id_checkin" required="true"/>
+                                    <label for="fechaCheckin">[[#{checkin.fechaCheckin}]]</label>
+                                    <input type="text" class="form-control" name="fechaCheckin" required="true"/>
                                 </div>
                                  <div class="mb-3">
-                                    <label for="descripcion">[[#{checkin.nacionalidad}]]</label>
-                                    <input type="text" class="form-control" name="id_checkin" required="true"/>
+                                    <label for="estado">[[#{checkin.estado}]]</label>
+                                    <input type="text" class="form-control" name="estado" required="true"/>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="activo">[[#{checkin.activo}]]</label>
-                                    <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
-                                </div>
+                           
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-primary" type="submit">Guardar</button>
@@ -70,7 +67,7 @@
         </section>
 
         <!-- 3 Sección principal para mostrar la informaccion de la entidad checkin -->
-        <section th:fragment="listadoCheckin" id="reservas">
+        <section th:fragment="listadoCheckin" id="checkin">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
@@ -78,21 +75,22 @@
                             <div class="card-header">
                                 <h4>[[#{checkin.listado}]]</h4>
                             </div>
-                            <div th:if="${checkins != null and !checkins.empty}">
+                            <div th:if="${checkin != null and !checkin.empty}">
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark">
                                         <tr><th>#</th>
                                             <th>[[#{checkin.idCheckin}]]</th>
                                             <th>[[#{checkin.fechaCheckin}]]</th>
-                                            <th>[[#{checkin.nacionalidad}]]</th>
-                                            <th>[[#{checkin.reserva.descripcion}]]</th>
+                                            <th>[[#{checkin.estado}]]</th>  
                                             <th></th></tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="checkin, contador : ${checkins}">
-                                            <td>[[${contador.count}]]</td>
-                                            <td>[[${checkin.origen}]]</td>
-                                            <td th:text="${checkin.activo} ? 'Activa' : 'Inactiva'" />
+                                        <tr th:each="checkin : ${checkin}">
+                                            <td>[[${checkin.idCheckin}]]</td>
+                                            <td>[[${checkin.reserva.idReserva}]]</td>
+                                            <td>[[${checkin.fechaCheckin}]]</td>
+                                            <th>[[#{checkin.estado}]]</th>
+                                            
                                             <td><a th:href="@{/checkin/eliminar/}+${checkin.idCheckin}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
@@ -102,7 +100,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="text-center p-2" th:if="${checkins == null or checkins.empty}">
+                            <div class="text-center p-2" th:if="${checkin == null or checkin.empty}">
                                 <span>[[#{lista.vacia}]]</span>
                             </div>
                         </div>

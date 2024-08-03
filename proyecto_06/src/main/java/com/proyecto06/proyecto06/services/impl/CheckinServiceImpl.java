@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.proyecto06.proyecto06.dao.CheckinDao;
+import com.proyecto06.proyecto06.domain.Contacto;
 import com.proyecto06.proyecto06.services.CheckinService;
 
 @Service
@@ -15,14 +16,8 @@ public class CheckinServiceImpl implements CheckinService {
     private CheckinDao checkinDao;
     
     @Override
-    public List<Checkin> getCheckin(boolean activos) {
-        var lista = checkinDao.findAll();
-        
-        if(activos) { //elimina inactivos
-           lista.removeIf(c -> !c.isActivo());
-        }
-        
-        return lista;
+    public List<Checkin> getCheckin() {
+        return checkinDao.findAll();
     }
 
     @Override

@@ -7,6 +7,8 @@ package com.proyecto06.proyecto06.controller;
 
 
 import com.proyecto06.proyecto06.domain.Checkin;
+import com.proyecto06.proyecto06.domain.Checkin;
+import com.proyecto06.proyecto06.services.CheckinService;
 import com.proyecto06.proyecto06.services.CheckinService;
 import com.proyecto06.proyecto06.services.FirebaseStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,46 +23,36 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/checkin")
 public class CheckinController {
-    
+
     @Autowired
     private CheckinService checkinService;
-    
+
     @GetMapping("/listado")
-    public String listado(Model model){
-        var lista = checkinService.getCheckin(false);
+    public String listado(Model model) {
+        var lista = checkinService.getCheckin();
         model.addAttribute("checkin", lista);
         model.addAttribute("totalCheckin", lista.size());
-        
+
         return "/checkin/listado";
-        
     }
-    @Autowired
-    private FirebaseStorageService firebasStorageService;
+
     @PostMapping("/guardar")
-    public String guardar(Checkin checkin,
-            @RequestParam MultipartFile imagenFile) {
-        if (!imagenFile.isEmpty()){
-            //se sube la imagen al Storage
-            checkinService.save(checkin);
-            String rutaImagen=firebasStorageService.cargaImagen(imagenFile,
-                    "checkin", checkin.getIdCheckin());
-            checkin.setRutaImagen(rutaImagen);
-            
-        }
+    public String guardar(Checkin checkin) {
         checkinService.save(checkin);
-        return"redirect:/checkin/listado";
+        return "redirect:/checkin/listado";
     }
+    
     @GetMapping("/eliminar/{idCheckin}")
-    public String eliminar (Checkin checkin) {
+    public String eliminar(Checkin checkin) {
         checkinService.delete(checkin);
-        return"redirect:/checkin/listado";
+        return "redirect:/checkin/listado";
     }
+
     @GetMapping("/modificar/{idCheckin}")
-    public String modificar (Checkin checkin, Model model) {
+    public String modificar(Checkin checkin, Model model) {
         checkin = checkinService.getCheckin(checkin);
         model.addAttribute("checkin", checkin);
-        return"/checkin/modifica";
-    }    
-    
-    
+        return "/checkin/modifica";
+    }
+
 }

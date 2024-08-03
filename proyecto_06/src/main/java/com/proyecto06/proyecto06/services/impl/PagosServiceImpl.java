@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.proyecto06.proyecto06.dao.PagosDao;
+import com.proyecto06.proyecto06.domain.Contacto;
 import com.proyecto06.proyecto06.services.PagosService;
 
 @Service
@@ -15,14 +16,8 @@ public class PagosServiceImpl implements PagosService {
     private PagosDao pagosDao;
     
     @Override
-    public List<Pagos> getPagos(boolean activos) {
-        var lista = pagosDao.findAll();
-        
-        if(activos) { //elimina inactivos
-           lista.removeIf(c -> !c.isActivo());
-        }
-        
-        return lista;
+    public List<Pagos> getPagos() {
+        return pagosDao.findAll();
     }
 
     @Override

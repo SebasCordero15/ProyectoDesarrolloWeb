@@ -20,17 +20,14 @@ public class Pagos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    private Long idPago; 
-    //private Long idReserva; 
+    private Long idPago;
     private String metodoPago;
-    private double monto;
-    private int fechaPago;
-    private String rutaImagen;
-    private boolean activo;
+    private String monto;
+    private String fechaPago;
+
+
     @ManyToOne
     @JoinColumn(name = "id_reserva")
     private Reserva reserva;
-  
 }
-
 

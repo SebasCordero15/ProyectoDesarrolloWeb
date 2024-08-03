@@ -4,12 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http//www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}"
-        <title>Proyecto06</title>
+          <title>Proyecto06</title>
         <meta charset="UTF-8"/> 
-      
+
     </head>
     <body>
-        
+
         <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
         <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
             <div class="container">
@@ -44,12 +44,12 @@
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{reserva.idReserva}]]</label>
-                                    <input type="text" class="form-control" name="id_Reserva" required="true"/>
+                                    <label for="idReserva">[[#{reserva.idReserva}]]</label>
+                                    <input type="text" class="form-control" name="idReserva" required="true"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="descripcion">[[#{reserva.idVuelo}]]</label>
-                                    <input type="text" class="form-control" name="id_vuelo" required="true"/>
+                                    <input type="text" class="form-control" name="idvuelo" required="true"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="descripcion">[[#{reserva.descripcion}]]</label>
@@ -91,14 +91,15 @@
                                             <th>[[#{reserva.idVuelo}]]</th>
                                             <th>[[#{reserva.descripcion}]]</th>
                                             <th>[[#{reserva.activo}]]</th>
-                                             <th>[[#{reserva.vuelo.codigoVuelo}]]</th>
+                                            <th>[[#{reserva.vuelo.codigoVuelo}]]</th>
                                             <th></th></tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="reserva, contador : ${reservas}">
-                                            <td>[[${contador.count}]]</td>
+                                        <tr th:each="reserva : ${reservas}">
+                                            <td>[[${reserva.idReserva}]]</td>
                                             <td>[[${reserva.descripcion}]]</td>
-                                            <td th:text="${reserva.activo} ? 'Activa' : 'Inactiva'" />
+                                            <td style="text-align: end">[[${reserva.activo}]]</td> 
+                                            <td>[[${reserva.vuelos.codigoVuelo}]]</td>
                                             <td><a th:href="@{/reserva/eliminar/}+${reserva.idReserva}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
@@ -147,16 +148,16 @@
                                                 <h4>[[#{accion.actualizar}]]</h4>
                                             </div>
                                             <div class="card-body">
-                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{reserva.idReserva}]]</label>
+                                                <div class="mb-3">
+                                                    <label for="idReserva">[[#{reserva.idReserva}]]</label>
                                                     <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
+                                                           name="descripcion" th:field="*{idReserva}"
                                                            required="true">
                                                 </div>
-                                                 <div class="mb-3">
-                                                    <label for="descripcion">[[#{reserva.idVuelo}]]</label>
+                                                <div class="mb-3">
+                                                    <label for="idVuelo">[[#{reserva.idVuelo}]]</label>
                                                     <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
+                                                           name="descripcion" th:field="*{idVuelo}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
@@ -173,7 +174,7 @@
                                                            id="activo"
                                                            th:field="*{activo}">
                                                 </div>
-                                                 <div class="mb-3">
+                                                <div class="mb-3">
                                                     <label for="imagen">[[#{reserva.rutaImagen}]]</label>
                                                     <input class="form-control" type="file" name="imagenFile"
                                                            onchange="readURL(this);" />
@@ -212,6 +213,6 @@
                 </div>
             </div>
         </section>
-       
+
     </body>
 </html>

@@ -8,7 +8,7 @@ import java.util.List;
 public interface CheckinService {
     //se enuncia un metodo que recupera los registros de la tabla categorira
     //dentro de un arraylist, pueden ser todos los registros o solo los activos
-    public List<Checkin>getCheckin(boolean activos);
+    public List<Checkin>getCheckin();
     
     //Se obtiene un registro de la tabla checkin en un objeto checkin si el id
     //checkin existe, si no, se pasa un null

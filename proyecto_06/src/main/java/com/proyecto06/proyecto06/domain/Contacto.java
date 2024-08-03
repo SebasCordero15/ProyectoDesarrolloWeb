@@ -20,7 +20,7 @@ public class Contacto {
     
     private Long idContacto; 
     private String nombre;
-    private String segundoNombre;
+    private String apellido;
     private String email;
     private String mensaje; 
     

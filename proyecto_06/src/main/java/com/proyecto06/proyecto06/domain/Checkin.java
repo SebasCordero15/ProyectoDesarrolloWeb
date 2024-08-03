@@ -21,11 +21,8 @@ public class Checkin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private Long idCheckin;
-    //private Long idReserva;
-    private int fechaCheckin;
-    private String nacionalidad;
-    private boolean activo;
-    private String rutaImagen;
+    private String fechaCheckin;
+    private String estado;
 
 
     @ManyToOne

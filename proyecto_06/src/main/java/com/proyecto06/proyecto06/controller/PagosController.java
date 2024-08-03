@@ -7,6 +7,8 @@ package com.proyecto06.proyecto06.controller;
 
 
 import com.proyecto06.proyecto06.domain.Pagos;
+import com.proyecto06.proyecto06.domain.Pagos;
+import com.proyecto06.proyecto06.services.PagosService;
 import com.proyecto06.proyecto06.services.PagosService;
 import com.proyecto06.proyecto06.services.FirebaseStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,46 +23,36 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/pagos")
 public class PagosController {
-    
+
     @Autowired
     private PagosService pagosService;
-    
+
     @GetMapping("/listado")
-    public String listado(Model model){
-        var lista = pagosService.getPagos(false);
+    public String listado(Model model) {
+        var lista = pagosService.getPagos();
         model.addAttribute("pagos", lista);
         model.addAttribute("totalPagos", lista.size());
-        
+
         return "/pagos/listado";
-        
     }
-    @Autowired
-    private FirebaseStorageService firebasStorageService;
+
     @PostMapping("/guardar")
-    public String guardar(Pagos pagos,
-            @RequestParam MultipartFile imagenFile) {
-        if (!imagenFile.isEmpty()){
-            //se sube la imagen al Storage
-            pagosService.save(pagos);
-            String rutaImagen=firebasStorageService.cargaImagen(imagenFile,
-                    "pagos", pagos.getIdPago());
-            pagos.setRutaImagen(rutaImagen);
-            
-        }
+    public String guardar(Pagos pagos) {
         pagosService.save(pagos);
-        return"redirect:/pagos/listado";
+        return "redirect:/pagos/listado";
     }
+    
     @GetMapping("/eliminar/{idPagos}")
-    public String eliminar (Pagos pagos) {
+    public String eliminar(Pagos pagos) {
         pagosService.delete(pagos);
-        return"redirect:/pagos/listado";
+        return "redirect:/pagos/listado";
     }
+
     @GetMapping("/modificar/{idPagos}")
-    public String modificar (Pagos pagos, Model model) {
+    public String modificar(Pagos pagos, Model model) {
         pagos = pagosService.getPagos(pagos);
         model.addAttribute("pagos", pagos);
-        return"/pagos/modifica";
-    }    
-    
-    
+        return "/pagos/modifica";
+    }
+
 }

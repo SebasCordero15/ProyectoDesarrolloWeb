@@ -8,7 +8,7 @@ import java.util.List;
 public interface PagosService {
     //se enuncia un metodo que recupera los registros de la tabla categorira
     //dentro de un arraylist, pueden ser todos los registros o solo los activos
-    public List<Pagos>getPagos(boolean activos);
+    public List<Pagos>getPagos();
     
     //Se obtiene un registro de la tabla pagos en un objeto pagos si el id
     //pagos existe, si no, se pasa un null
