@@ -91,15 +91,16 @@
                                             <th>[[#{reserva.idVuelo}]]</th>
                                             <th>[[#{reserva.descripcion}]]</th>
                                             <th>[[#{reserva.activo}]]</th>
-                                            <th>[[#{reserva.vuelo.codigoVuelo}]]</th>
+                                            
                                             <th></th></tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="reserva : ${reservas}">
                                             <td>[[${reserva.idReserva}]]</td>
+                                            <td>[[${reserva.vuelos.idVuelo}]]</td>
                                             <td>[[${reserva.descripcion}]]</td>
-                                            <td style="text-align: end">[[${reserva.activo}]]</td> 
-                                            <td>[[${reserva.vuelos.codigoVuelo}]]</td>
+                                            <td>[[${reserva.activo}]]</td> 
+                                            
                                             <td><a th:href="@{/reserva/eliminar/}+${reserva.idReserva}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
