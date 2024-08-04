@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<!--Esta es la primera pagina html-->
-<!-- Son etiquetas extendias -->
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http//www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}"
-          <title>Proyecto06</title>
-        <meta charset="UTF-8"/> 
-
+         <title>Proyecto06</title>
+         <meta charset="UTF-8"/> 
+       
     </head>
     <body>
 
@@ -97,7 +96,7 @@
                                     <tbody>
                                         <tr th:each="reserva : ${reservas}">
                                             <td>[[${reserva.idReserva}]]</td>
-                                            <td>[[${reserva.vuelos.idVuelo}]]</td>
+                                            <td>[[${reserva.vuelos.codigoVuelo}]]</td>
                                             <td>[[${reserva.descripcion}]]</td>
                                             <td>[[${reserva.activo}]]</td> 
                                             

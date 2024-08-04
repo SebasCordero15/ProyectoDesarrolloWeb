@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<!--Esta es la primera pagina html-->
-<!-- Son etiquetas extendias -->
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http//www.thymeleaf.org">
-    <head th:replace="~{layout/plantilla :: head}"
-        <title>Proyecto06</title>
-        <meta charset="UTF-8"/> 
-      
-    </head>
-    <body>
-        <header th:replace="~{layout/plantilla :: header}"/>
-        <footer th:replace="~{layout/plantilla :: footer}"/> 
-       
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <meta charset="UTF-8" />
+    <title>Proyecto06</title>
+    <link rel="stylesheet" href="css/Styles.css" />
+</head>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"></header>
+    <div class="fondo d-flex justify-content-center align-items-center"></div>
+    <footer th:replace="~{layout/plantilla :: footer}"></footer>
+</body>
 </html>
