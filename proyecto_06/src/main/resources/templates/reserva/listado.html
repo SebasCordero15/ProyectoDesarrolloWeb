@@ -5,13 +5,14 @@
       xmlns:th="http//www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}"
         <title>Proyecto06</title>
-        <meta charset="UTF-8"/>           
+        <meta charset="UTF-8"/> 
+        <link rel="stylesheet" href="css/Styles.css" />
     </head>
     
     <body>
         <header th:replace="~{layout/plantilla :: header}"/>
         
- 
+        <div class="fondo d-flex justify-content-center align-items-center"></div>
         <section th:replace="~{reserva/fragmentos :: botonesAgregar}"/>
         <section th:replace="~{reserva/fragmentos :: agregarReserva}"/>
         <section th:replace="~{reserva/fragmentos :: listadoReservas}"/>

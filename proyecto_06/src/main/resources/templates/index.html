@@ -7,7 +7,10 @@
 </head>
 <body>
     <header th:replace="~{layout/plantilla :: header}"></header>
-    <div class="fondo d-flex justify-content-center align-items-center"></div>
+    
+    <section th:replace="~{pruebas/fragmentos :: tarjetas}"/>
+    <!-- <div class="fondo d-flex justify-content-center align-items-center"></div> -->
+        
     <footer th:replace="~{layout/plantilla :: footer}"></footer>
 </body>
 </html>

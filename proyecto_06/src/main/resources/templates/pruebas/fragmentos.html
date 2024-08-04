@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--Esta es la primera pagina html-->
+<!-- Son etiquetas extendias -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http//www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Proyecto06</title>
+        <meta charset="UTF-8"/> 
+    </head>
+    <body>
+        <!-- 1 Sección para crear los tabs de categorias-->
+        <section th:fragment="tabsReservas" class="bg-light">
+            <div class="row p-4">
+                 <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link " href="/pruebas/listado">[[#{pruebas.todas}]]</a>
+                    </li>
+                    <li class="nav-item" th:each="r : ${reservas}">
+                        <a class="nav-link" 
+                           th:href="@{/pruebas/listado/} + ${r.idReserva}">[[${r.descripcion}]]</a>
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+        
+                <!-- 2 Sección para mostrar las tarjetas de los productos-->
+        <section th:fragment="tarjetas" class="bg-light">
+            <div class="row row-cols-4">
+                <div class="card" th:each="v : ${vuelos}">
+                    <div class="card-header">
+                        <h4>[[${v.idVuelo}]]</h4>
+                    </div> 
+                    <div class="card-body">
+                        <p>[[${v.codigoVuelo}]]</p>
+                        <p>[[${v.origen}]]</p>
+                        <p>[[${v.destino}]]</p>
+                        <p>[[${v.fechaSalida}]]</p>
+                        <p>[[${v.fechaLlegada}]]</p>
+                    </div>
+                </div>
+                   
+            </div>
+        </section>
+      <!-- 3 Sección para mostrar los filtros de los productos-->        
+      <section th:fragment="filtros" class="bg-light m-2">
+            <div class="row-cols-3">
+                <div class="card p-2">
+                    <form method="post"
+                        th:action="@{/pruebas/consulta1}">
+                        <div class="card-header text-white text-center bg-primary">
+                            <h4>[[#{pruebas.ampliadas}]]</h4>
+                        </div>                        
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="precioInf">[[#{pruebas.precio.inferior}]]</label>
+                                <input type="number" 
+                                       class="form-control"
+                                       th:value="${precioInf}"
+                                       th:name="precioInf"
+                                       required="true"/>
+                            </div>                           
+                             <div class="mb-3">
+                                <label for="precioSup">[[#{pruebas.precio.superior}]]</label>
+                                <input type="number" 
+                                       class="form-control"
+                                       th:value="${precioSup}"
+                                       th:name="precioSup"
+                                       required="true"/>
+                            </div>  
+                        </div>
+                   
+                        <div class="card-footer text-center">
+                            <button type="submit"
+                                class="btn btn-primary">
+                                <i class="fas fa-magnifying-glass"></i> [[#{pruebas.ampliadas}]]
+                            </button>
+                        </div>   
+                        
+                        
+                    </form>
+                </div>
+                
+                
+                
+            </div>
+        </section>                
+
+  
+    </body>
+</html>
+
