@@ -48,7 +48,7 @@ public class PagosController {
         return "redirect:/pagos/listado";
     }
 
-    @GetMapping("/modificar/{idPago}")
+    @GetMapping("/modificar/{idPagos}")
     public String modificar(Pagos pagos, Model model) {
         pagos = pagosService.getPagos(pagos);
         model.addAttribute("pagos", pagos);

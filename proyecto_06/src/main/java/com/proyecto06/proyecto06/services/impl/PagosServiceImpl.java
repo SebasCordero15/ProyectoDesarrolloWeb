@@ -22,7 +22,7 @@ public class PagosServiceImpl implements PagosService {
 
     @Override
     public Pagos getPagos(Pagos pagos) {
-        return pagosDao.findById(pagos.getIdPago()).orElse(null);
+        return pagosDao.findById(pagos.getIdPagos()).orElse(null);
     }
 
     @Override

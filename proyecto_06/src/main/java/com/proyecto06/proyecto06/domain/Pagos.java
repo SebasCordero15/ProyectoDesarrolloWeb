@@ -20,7 +20,7 @@ public class Pagos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    private Long idPago;
+    private Long idPagos;
     private String metodoPago;
     private String monto;
     private String fechaPago;
