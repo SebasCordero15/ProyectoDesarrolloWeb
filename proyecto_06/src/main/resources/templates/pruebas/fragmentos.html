@@ -29,16 +29,21 @@
                 <!-- 2 Sección para mostrar las tarjetas de los productos-->
         <section th:fragment="tarjetas" class="bg-light">
             <div class="row row-cols-4">
-                <div class="card" th:each="v : ${vuelos}">
+                <div class="card" th:each="p : ${paquetes}">
+                   <figure>
+                        <img th:src="${p.rutaImagen}" 
+                             height="200"
+                             alt="alt"/>
+                        <figcaption>
+                           ₡[[${p.precio}]] ([[${p.existencias}]])
+                        </figcaption>
+                         
+                    </figure>
                     <div class="card-header">
-                        <h4>[[${v.idVuelo}]]</h4>
+                        <h4>[[${p.descripcion}]]</h4>
                     </div> 
                     <div class="card-body">
-                        <p>[[${v.codigoVuelo}]]</p>
-                        <p>[[${v.origen}]]</p>
-                        <p>[[${v.destino}]]</p>
-                        <p>[[${v.fechaSalida}]]</p>
-                        <p>[[${v.fechaLlegada}]]</p>
+                        <p>[[${p.detalle}]]</p>
                     </div>
                 </div>
                    

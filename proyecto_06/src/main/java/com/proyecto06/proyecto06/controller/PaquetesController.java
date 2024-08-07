@@ -29,9 +29,9 @@ public class PaquetesController {
 
     @GetMapping("/listado")
     public String listado(Model model) {
-        var paquetess = paquetesService.getPaquetes(false);
-        model.addAttribute("paquetess", paquetess);
-        model.addAttribute("totalPaquetess", paquetess.size());
+        var paquetes = paquetesService.getPaquetes(false);
+        model.addAttribute("paquetes", paquetes);
+        model.addAttribute("totalPaquetes", paquetes.size());
         var categorias = categoriaService.getCategoria(false);
         model.addAttribute("categorias", categorias);
 

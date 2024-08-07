@@ -90,6 +90,12 @@ public class ProjectConfig implements WebMvcConfigurer {
                         "/categoria/modificar/**","/categoria/eliminar/**",
                         "/reserva/nuevo","/reserva/guardar",
                         "/reserva/modificar/**","/reserva/eliminar/**",
+                        "/checkin/nuevo","/checkin/guardar",
+                        "/checkin/modificar/**","/checkin/eliminar/**",
+                        "/pasajeros/nuevo","/pasajeros/guardar",
+                        "/pasajeros/modificar/**","/pasajeros/eliminar/**",
+                        "/contacto/nuevo","/contacto/guardar",
+                        "/contacto/modificar/**","/contacto/eliminar/**",
                         "/vuelos/nuevo","/vuelos/guardar",
                         "/vuelos/modificar/**","/vuelos/eliminar/**",
                         "/usuario/nuevo","/usuario/guardar",
@@ -97,10 +103,15 @@ public class ProjectConfig implements WebMvcConfigurer {
                         "/reportes/**"
                 ).hasRole("ADMIN")
                 .requestMatchers(
-                        "/producto/listado",
+                        "/paquetes/listado",
                         "/categoria/listado",
+                        "/reserva/listado",
+                        "/checkin/listado",
+                        "/pasajeros/listado",
+                        "/vuelos/listado",
+                        "/contacto/listado",
                         "/usuario/listado"
-                ).hasAnyRole("VENDEDOR")
+                ).hasAnyRole("ADMIN","VENDEDOR")
                 .requestMatchers("/facturar/carrito")
                 .hasRole("USER")
                 )
