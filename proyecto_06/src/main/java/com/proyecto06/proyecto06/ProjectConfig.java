@@ -4,8 +4,10 @@ package com.proyecto06.proyecto06;
 
 import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -15,87 +17,90 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
- 
+
+/**
+ *
+ * @author TALLER
+ */
 @Configuration
+public class ProjectConfig implements WebMvcConfigurer {
 
-public class ProjectConfig
-
-        implements WebMvcConfigurer {
- 
     @Bean
-
-    public LocaleResolver localeResolver() {
-
+    public LocaleResolver localResolver() {
         var slr = new SessionLocaleResolver();
 
         slr.setDefaultLocale(Locale.getDefault());
-
-        slr.setLocaleAttributeName("session.current.locale");
-
-        slr.setTimeZoneAttributeName("session.current.timezone");
+        slr.setLocaleAttributeName("session.current.timezone");
 
         return slr;
 
     }
 
     @Bean
-
     public LocaleChangeInterceptor localeChangeInterceptor() {
-
         var lci = new LocaleChangeInterceptor();
-
         lci.setParamName("lang");
 
         return lci;
-
     }
 
     @Override
-
     public void addInterceptors(InterceptorRegistry registro) {
-
         registro.addInterceptor(localeChangeInterceptor());
-
     }
-    /*Los siguiente métodos son para implementar el tema de seguridad dentro del proyecto */
+    
+    /* Este método se utiliza al enviar correos de activación, según el idioma*/
+    @Bean("messageSource")
+    public MessageSource messageSource() {
+       ResourceBundleMessageSource messageSource = 
+               new ResourceBundleMessageSource();
+       messageSource.setBasenames("messages");
+       messageSource.setDefaultEncoding("UTF-8");
+       return messageSource;
+    }    
+    
+    
+    /* Los siguiente métodos son para implementar el tema de seguridad dentro del proyecto */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/registro/nuevo").setViewName("/registro/nuevo");
-    }
+ }
 
-    @Bean
+@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
-                .requestMatchers("/", "/index", "/errores/**",
-                        "/carrito/**", "/pruebas/**", "/reportes/**",
-                        "/registro/**", "/js/**", "/webjars/**")
-                .permitAll()
+                .requestMatchers("/","/index","/errores/**",
+                        "/carrito/**","/pruebas/**","/reportes/**",
+                        "/registro/**","/js/**","/webjars/**")
+                        .permitAll()
                 .requestMatchers(
-                        "/checkin/listado", "/checkin/guardar",
-                        "/checkin/eliminar", "/checkin/modificar/**",
-                        "/reserva/nuevo", "/reserva/guardar",
-                        "/reserva/modificar", "/reserva/eliminar",
-                        "/vuelos/listado", "/vuelos/guardar",
-                        "/vuelos/modificar/**", "/vuelos/eliminar/**",
-                        "/contacto/listado", "/contacto/guardar",
-                        "/contacto/modificar/{idContacto}", "/contacto/eliminar/{idContacto}",
+                        "/paquetes/nuevo","/paquetes/guardar",
+                        "/paquetes/modificar/**","/paquetes/eliminar/**",
+                        "/categoria/nuevo","/categoria/guardar",
+                        "/categoria/modificar/**","/categoria/eliminar/**",
+                        "/reserva/nuevo","/reserva/guardar",
+                        "/reserva/modificar/**","/reserva/eliminar/**",
+                        "/vuelos/nuevo","/vuelos/guardar",
+                        "/vuelos/modificar/**","/vuelos/eliminar/**",
+                        "/usuario/nuevo","/usuario/guardar",
+                        "/usuario/modificar/**","/usuario/eliminar/**",
                         "/reportes/**"
                 ).hasRole("ADMIN")
                 .requestMatchers(
-                        "/checkin/listado",
-                        "/contacto/listado",
-                        "/reserva/listado",
-                        "/vuelos/listado"
-                ).hasAnyRole("ADMIN", "VENDEDOR")
+                        "/producto/listado",
+                        "/categoria/listado",
+                        "/usuario/listado"
+                ).hasAnyRole("VENDEDOR")
                 .requestMatchers("/facturar/carrito")
                 .hasRole("USER")
                 )
@@ -105,8 +110,8 @@ public class ProjectConfig
         return http.build();
     }
 
-    /* El siguiente método se utiliza para completar la clase no es 
-    realmente funcional, la próxima semana se reemplaza con usuarios de BD */
+/* El siguiente método se utiliza para completar la clase no es 
+    realmente funcional, la próxima semana se reemplaza con usuarios de BD */    
 //    @Bean
 //    public UserDetailsService users() {
 //        UserDetails admin = User.builder()
@@ -125,8 +130,9 @@ public class ProjectConfig
 //                .roles("USER")
 //                .build();
 //        return new InMemoryUserDetailsManager(user, sales, admin);
-//    } 
-//    @Autowired
+//    }
+
+  @Autowired
   private UserDetailsService userDetailsService;
   
   @Autowired
@@ -136,6 +142,5 @@ public class ProjectConfig
         build.userDetailsService(userDetailsService)
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
-    
     
 }
