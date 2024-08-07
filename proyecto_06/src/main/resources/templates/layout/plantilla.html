@@ -1,6 +1,8 @@
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
     <head th:fragment="head">
         <title>Proyecto06</title>
         <meta charset="UTF-8" />
@@ -38,6 +40,35 @@
                                     <li><a class="dropdown-item" th:href="@{/(lang=en)}">EN</a></li>
                                 </ul>
                             </li>
+                        </ul>
+                        <ul class="navbar-nav" 
+                            sec:authorized="!isAuthenticated()">
+                            <li class="nav-item px-2">
+                                <a class="nav-menu-link nav-link"
+                                   th:href="@{/login}">
+                                    <i class="fas fa-right-to-bracket"> 
+                                    </i>
+                                </a>
+                            </li>
+                        </ul>
+                        
+                          <ul class="navbar-nav" 
+                            sec:authorized="isAuthenticated()">
+                            <li class="nav-item text-white my-auto">
+                              <img th:src="@{${session.usuarioImagen}}"
+                                   class='rounded-circle'
+                                   height="40"
+                                   alt="alt"/>
+                                <span sec:authentication='name'>Jhon</span> 
+                            </li>
+                              <li class="nav-item text-white my auto">
+                                 <form method="post"
+                                     th:action='@{/logout}'>
+                                     <button class='btn btn-dark'>
+                                         <i class="fas fa-right-from-bracket"></i>
+                                     </button>
+                                 </form>
+                                </li>
                         </ul>
                     </div>
                 </div>
