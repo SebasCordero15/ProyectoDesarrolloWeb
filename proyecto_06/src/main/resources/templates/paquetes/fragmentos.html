@@ -110,6 +110,69 @@
             </div>
         </section>
 
+        <!-- 3 Sección para mostrar los filtros de los paquetes-->        
+        <section th:fragment="filtros" class="bg-light m-2">
+            <div class="card p-2">
+                <form method="post"
+                      th:action="@{/paquetes/listado}"> 
+                    <div class="card-header text-white text-center bg-warning">
+                        <h4>[[#{filtro.busqueda}]]</h4> 
+                    </div>                        
+                    <div class="card-body">
+                        <div class="row g-2"> <!-- Añadimos 'row' para organizar en filas y 'g-2' para el espacio entre columnas -->
+                            <div class="col-md">
+                                <label for="ubicacion">[[#{filtro.ubicacion}]]</label> 
+                                <input type="text" 
+                                       class="form-control"
+                                       th:value="${ubicacion}"
+                                       th:name="ubicacion"
+                                       id="ubicacion"
+                                       placeholder="Ej. Nueva York"
+                                       required="true"/>
+                            </div>                           
+                            <div class="col-md">
+                                <label for="fechaSalida">[[#{filtro.fechaSalida}]]</label> 
+                                <input type="date" 
+                                       class="form-control"
+                                       th:value="${fechaSalida}"
+                                       th:name="fechaSalida"
+                                       id="fechaSalida"
+                                       required="true"/>
+                            </div>  
+                            <div class="col-md">
+                                <label for="fechaLlegada">[[#{filtro.fechaLlegada}]]</label> 
+                                <input type="date" 
+                                       class="form-control"
+                                       th:value="${fechaLlegada}"
+                                       th:name="fechaLlegada"
+                                       id="fechaLlegada"
+                                       required="true"/>
+                            </div>
+                            <div class="col-md">
+                                <label for="cantidadPersonas">[[#{filtro.cantidadPersonas}]]</label> 
+                                <input type="number" 
+                                       class="form-control"
+                                       th:value="${cantidadPersonas}"
+                                       th:name="cantidadPersonas"
+                                       id="cantidadPersonas"
+                                       placeholder="Ej. 2"
+                                       min="1"
+                                       required="true"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer text-center">
+                        <button type="submit"
+                                class="btn btn-warning">
+                            <i class="fas fa-magnifying-glass"></i> [[#{boton.buscar}]]
+                        </button>
+                    </div>   
+                </form>
+            </div>
+        </section>
+
+
         <!-- 3 Sección principal para mostrar la informaccion de la entidad paquetes -->
         <section th:fragment="listadoPaquetes" id="paquetes">
             <div class="container">

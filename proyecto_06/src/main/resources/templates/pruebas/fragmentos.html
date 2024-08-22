@@ -15,21 +15,21 @@
             <div class="row p-4">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link " href="/pruebas/listado">[[#{pruebas.todas}]]</a>
+                        <a class="nav-link " href="/paquetes/listado">[[#{paquetes.todas}]]</a>
                     </li>
                     <li class="nav-item" th:each="c : ${categorias}">
                         <a class="nav-link" 
-                           th:href="@{/pruebas/listado/} + ${c.idCategoria}">[[${c.descripcion}]]</a>
+                           th:href="@{/paquetes/listado/} + ${c.idCategoria}">[[${c.descripcion}]]</a>
                     </li>
 
                 </ul>
             </div>
         </section>
 
-        <!-- 2 Sección para mostrar las tarjetas de los productos-->
+        <!-- 2 Sección para mostrar las tarjetas de los paquetes-->
         <section th:fragment="tarjetas" class="bg-light">
             <div class="row row-cols-4">
-                <div class="card" th:each="p : ${productos}">
+                <div class="card" th:each="p : ${paquetes}">
                     <figure>
                         <img th:src="${p.rutaImagen}" height="200"/>
                         <figcaption class="d-flex justify-content-evenly">
@@ -38,7 +38,7 @@
                             </div>
                             <div>
                                 <form>
-                                    <input type="hidden" name="texto" th:value="${p.idProducto}"/>
+                                    <input type="hidden" name="texto" th:value="${p.idPaquetes}"/>
                                     <input type="hidden" name="texto" th:value="${p.existencias}"/>
                                     <button class="btn btn-ligth" 
                                             id="addCar" 
@@ -63,51 +63,7 @@
             </div>
         </section>
 
-        <!-- 3 Sección para mostrar los filtros de los productos-->        
-        <section th:fragment="filtros" class="bg-light m-2">
-            <div class="row-cols-3">
-                <div class="card p-2">
-                    <form method="post"
-                          th:action="@{/pruebas/consulta1}">
-                        <div class="card-header text-white text-center bg-primary">
-                            <h4>[[#{pruebas.ampliadas}]]</h4>
-                        </div>                        
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label for="precioInf">[[#{pruebas.precio.inferior}]]</label>
-                                <input type="number" 
-                                       class="form-control"
-                                       th:value="${precioInf}"
-                                       th:name="precioInf"
-                                       required="true"/>
-                            </div>                           
-                            <div class="mb-3">
-                                <label for="precioSup">[[#{pruebas.precio.superior}]]</label>
-                                <input type="number" 
-                                       class="form-control"
-                                       th:value="${precioSup}"
-                                       th:name="precioSup"
-                                       required="true"/>
-                            </div>  
-                        </div>
-
-                        <div class="card-footer text-center">
-                            <button type="submit"
-                                    class="btn btn-primary">
-                                <i class="fas fa-magnifying-glass"></i> [[#{pruebas.ampliadas}]]
-                            </button>
-                        </div>   
-
-
-                    </form>
-                </div>
-
-
-
-            </div>
-        </section>                
-
-
+ 
     </body>
 </html>
 
