@@ -1,9 +1,9 @@
 
 package com.proyecto06.proyecto06.services.impl;
 
-import com.tiendaM.Tienda.dao.*;
-import com.tiendaM.Tienda.domain.*;
-import com.tiendaM.Tienda.service.*;
+import com.proyecto06.proyecto06.dao.*;
+import com.proyecto06.proyecto06.domain.*;
+import com.proyecto06.proyecto06.services.ItemService;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class ItemServiceImpl implements ItemService {
         List<Item> listaItems = (List) session.getAttribute("listaItems");
         if (listaItems != null) {
             for (Item i : listaItems) {
-                if (i.getIdProducto() == item.getIdProducto()) {
+                if (i.getIdPaquete() == item.getIdPaquete()) {
                     return i;
                 }
             }
@@ -45,7 +45,7 @@ public class ItemServiceImpl implements ItemService {
             var existe = false;
             for (Item i : listaItems) {
                 posicion++;
-                if (i.getIdProducto() == item.getIdProducto()) {
+                if (i.getIdPaquete() == item.getIdPaquete()) {
                     existe = true;
                     break;
                 }
@@ -65,7 +65,7 @@ public class ItemServiceImpl implements ItemService {
         }
         var existe = false;
         for (Item i : listaItems) {
-            if (i.getIdProducto() == item.getIdProducto()) {
+            if (i.getIdPaquete() == item.getIdPaquete()) {
                 existe = true;
                 if (i.getCantidad() < i.getExistencias()) {
                     i.setCantidad(i.getCantidad() + 1);
@@ -85,7 +85,7 @@ public class ItemServiceImpl implements ItemService {
         List<Item> listaItems = (List) session.getAttribute("listaItems");
         if (listaItems != null) {
             for (Item i : listaItems) {
-                if (i.getIdProducto() == item.getIdProducto()) {
+                if (i.getIdPaquete() == item.getIdPaquete()) {
                     i.setCantidad(item.getCantidad());
                     session.setAttribute("listaItems", listaItems);
                     break;
@@ -97,7 +97,7 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private UsuarioDao usuarioDao;
     @Autowired
-    private ProductoDao productoDao;
+    private PaquetesDao paquetesDao;
     @Autowired
     private FacturaDao facturaDao;
     @Autowired
@@ -133,20 +133,20 @@ public class ItemServiceImpl implements ItemService {
         Factura factura = new Factura(usuario.getIdUsuario());
         factura = facturaDao.save(factura);
 
-        //Se debe registrar las ventas de cada producto -actualizando existencias-
+        //Se debe registrar las ventas de cada paquetes -actualizando existencias-
         List<Item> listaItems = (List) session.getAttribute("listaItems");
         if (listaItems != null) {
             double total = 0;
             for (Item i : listaItems) {
-                Producto producto = productoDao.getReferenceById(i.getIdProducto());
-                if (producto.getExistencias() >= i.getCantidad()) {
+                Paquetes paquetes = paquetesDao.getReferenceById(i.getIdPaquete());
+                if (paquetes.getExistencias() >= i.getCantidad()) {
                     Venta venta = new Venta(factura.getIdFactura(),
-                            i.getIdProducto(),
+                            i.getIdPaquete(),
                             i.getPrecio(),
                             i.getCantidad());
                     ventaDao.save(venta);
-                    producto.setExistencias(producto.getExistencias() - i.getCantidad());
-                    productoDao.save(producto);
+                    paquetes.setExistencias(paquetes.getExistencias() - i.getCantidad());
+                    paquetesDao.save(paquetes);
                     total += i.getCantidad() * i.getPrecio();
                 }
             }
@@ -161,7 +161,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     public double getTotal() {
-        //Se debe registrar las ventas de cada producto -actualizando existencias-
+        //Se debe registrar las ventas de cada paquetes -actualizando existencias-
         List<Item> listaItems = (List) session.getAttribute("listaItems");
         double total = 0;
         if (listaItems != null) {

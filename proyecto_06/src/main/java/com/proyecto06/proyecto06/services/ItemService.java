@@ -1,8 +1,8 @@
 
 package com.proyecto06.proyecto06.services;
 
+import com.proyecto06.proyecto06.domain.Item;
 import java.util.List;
-import com.tiendaM.Tienda.domain.Item;
 
 public interface ItemService {
      //Se usa para tener en una session de memoria la información del carrito de compras

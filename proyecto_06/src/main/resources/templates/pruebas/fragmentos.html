@@ -6,39 +6,52 @@
       xmlns:sec="http//www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>Proyecto06</title>
+        <title>TechShopcito</title>
         <meta charset="UTF-8"/> 
     </head>
     <body>
         <!-- 1 Sección para crear los tabs de categorias-->
-        <section th:fragment="tabsReservas" class="bg-light">
+        <section th:fragment="tabsCategorias" class="bg-light">
             <div class="row p-4">
-                 <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link " href="/pruebas/listado">[[#{pruebas.todas}]]</a>
                     </li>
-                    <li class="nav-item" th:each="r : ${reservas}">
+                    <li class="nav-item" th:each="c : ${categorias}">
                         <a class="nav-link" 
-                           th:href="@{/pruebas/listado/} + ${r.idReserva}">[[${r.descripcion}]]</a>
+                           th:href="@{/pruebas/listado/} + ${c.idCategoria}">[[${c.descripcion}]]</a>
                     </li>
 
                 </ul>
             </div>
         </section>
-        
-                <!-- 2 Sección para mostrar las tarjetas de los productos-->
+
+        <!-- 2 Sección para mostrar las tarjetas de los productos-->
         <section th:fragment="tarjetas" class="bg-light">
             <div class="row row-cols-4">
-                <div class="card" th:each="p : ${paquetes}">
-                   <figure>
-                        <img th:src="${p.rutaImagen}" 
-                             height="200"
-                             alt="alt"/>
-                        <figcaption>
-                           ₡[[${p.precio}]] ([[${p.existencias}]])
+                <div class="card" th:each="p : ${productos}">
+                    <figure>
+                        <img th:src="${p.rutaImagen}" height="200"/>
+                        <figcaption class="d-flex justify-content-evenly">
+                            <div>
+                                ¢[[${p.precio}]] ([[${p.existencias}]])
+                            </div>
+                            <div>
+                                <form>
+                                    <input type="hidden" name="texto" th:value="${p.idProducto}"/>
+                                    <input type="hidden" name="texto" th:value="${p.existencias}"/>
+                                    <button class="btn btn-ligth" 
+                                            id="addCar" 
+                                            name="addCar" 
+                                            onclick="addCart(this.form)" 
+                                            type="button">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </figcaption>
-                         
                     </figure>
+
                     <div class="card-header">
                         <h4>[[${p.descripcion}]]</h4>
                     </div> 
@@ -46,15 +59,16 @@
                         <p>[[${p.detalle}]]</p>
                     </div>
                 </div>
-                   
+
             </div>
         </section>
-      <!-- 3 Sección para mostrar los filtros de los productos-->        
-      <section th:fragment="filtros" class="bg-light m-2">
+
+        <!-- 3 Sección para mostrar los filtros de los productos-->        
+        <section th:fragment="filtros" class="bg-light m-2">
             <div class="row-cols-3">
                 <div class="card p-2">
                     <form method="post"
-                        th:action="@{/pruebas/consulta1}">
+                          th:action="@{/pruebas/consulta1}">
                         <div class="card-header text-white text-center bg-primary">
                             <h4>[[#{pruebas.ampliadas}]]</h4>
                         </div>                        
@@ -67,7 +81,7 @@
                                        th:name="precioInf"
                                        required="true"/>
                             </div>                           
-                             <div class="mb-3">
+                            <div class="mb-3">
                                 <label for="precioSup">[[#{pruebas.precio.superior}]]</label>
                                 <input type="number" 
                                        class="form-control"
@@ -76,24 +90,24 @@
                                        required="true"/>
                             </div>  
                         </div>
-                   
+
                         <div class="card-footer text-center">
                             <button type="submit"
-                                class="btn btn-primary">
+                                    class="btn btn-primary">
                                 <i class="fas fa-magnifying-glass"></i> [[#{pruebas.ampliadas}]]
                             </button>
                         </div>   
-                        
-                        
+
+
                     </form>
                 </div>
-                
-                
-                
+
+
+
             </div>
         </section>                
 
-  
+
     </body>
 </html>
 

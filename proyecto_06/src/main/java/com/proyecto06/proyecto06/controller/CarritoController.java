@@ -2,6 +2,8 @@
 package com.proyecto06.proyecto06.controller;
 
 import com.proyecto06.proyecto06.domain.*;
+import com.proyecto06.proyecto06.services.ItemService;
+import com.proyecto06.proyecto06.services.PaquetesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +16,7 @@ public class CarritoController {
     @Autowired
     private ItemService itemService;
     @Autowired
-    private ProductoService productoService;
+    private PaquetesService productoService;
 
     //Para ver el carrito
     @GetMapping("/carrito/listado")
@@ -31,11 +33,11 @@ public class CarritoController {
     }    
    
     //Para Agregar un producto al carrito
-    @GetMapping("/carrito/agregar/{idProducto}")
+    @GetMapping("/carrito/agregar/{idPaquetes}")
     public ModelAndView agregarItem(Model model, Item item) {
         Item item2 = itemService.get(item);
         if (item2 == null) {
-            Producto producto = productoService.getProducto(item);
+            Paquetes producto = productoService.getPaquetes(item);
             item2 = new Item(producto);
         }
         itemService.save(item2);
@@ -53,7 +55,7 @@ public class CarritoController {
     }
 
     //Para mofificar un producto del carrito
-    @GetMapping("/carrito/modificar/{idProducto}")
+    @GetMapping("/carrito/modificar/{idPaquetes}")
     public String modificarItem(Item item, Model model) {
         item = itemService.get(item);
         model.addAttribute("item", item);
@@ -61,7 +63,7 @@ public class CarritoController {
     }
 
     //Para eliminar un elemento del carrito
-    @GetMapping("/carrito/eliminar/{idProducto}")
+    @GetMapping("/carrito/eliminar/{idPaquetes}")
     public String eliminarItem(Item item) {
         itemService.delete(item);
         return "redirect:/carrito/listado";
