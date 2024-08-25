@@ -80,14 +80,14 @@
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark">
                                         <tr><th>#</th>
-                                            <th>[[#{checkin.idCheckin}]]</th>
+                                           
                                             <th>[[#{checkin.fechaCheckin}]]</th>
                                             <th>[[#{checkin.estado}]]</th>  
                                             <th></th></tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="checkin : ${checkin}">
-                                            <td>[[${checkin.idCheckin}]]</td>
+                                           
                                             <td>[[${checkin.reserva.idReserva}]]</td>
                                             <td>[[${checkin.fechaCheckin}]]</td>
                                             <th>[[#{checkin.estado}]]</th>
