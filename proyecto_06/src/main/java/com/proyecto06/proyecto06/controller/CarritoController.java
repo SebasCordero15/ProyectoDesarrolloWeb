@@ -16,7 +16,7 @@ public class CarritoController {
     @Autowired
     private ItemService itemService;
     @Autowired
-    private PaquetesService paqueteService;
+    private PaquetesService paquetesService;
 
     //Para ver el carrito
     @GetMapping("/carrito/listado")
@@ -37,8 +37,8 @@ public class CarritoController {
     public ModelAndView agregarItem(Model model, Item item) {
         Item item2 = itemService.get(item);
         if (item2 == null) {
-            Paquetes paquete = paqueteService.getPaquetes(item);
-            item2 = new Item(paquete);
+            Paquetes paquetes = paquetesService.getPaquetes(item);
+            item2 = new Item(paquetes);
         }
         itemService.save(item2);
         var lista = itemService.gets();

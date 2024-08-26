@@ -31,8 +31,8 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>#</th>
-                                            <th>[[#{paquete.descripcion}]]</th>
-                                            <th>[[#{paquete.precio}]]</th>
+                                            <th>[[#{paquetes.descripcion}]]</th>
+                                            <th>[[#{paquetes.precio}]]</th>
                                             <th>[[#{carrito.cantidad}]]</th>
                                             <th>[[#{carrito.total}]]</th>
                                             <th></th>
@@ -47,13 +47,13 @@
                                             <td class="text-center">[[${item.cantidad}]]</td>
                                             <td class="text-center">[[${item.cantidad*item.precio}]]</td>
                                             <td>
-                                                <a th:href="@{/carrito/eliminar/}+${item.idPaquete}"
+                                                <a th:href="@{/carrito/eliminar/}+${item.IdPaquete}"
                                                    class="btn btn-danger">
                                                     <i class='fas fa-trash'></i> [[#{accion.eliminar}]]
                                                 </a>
                                             </td>
                                             <td>
-                                                <a th:href="@{/carrito/modificar/}+${item.idPaquete}"
+                                                <a th:href="@{/carrito/modificar/}+${item.IdPaquete}"
                                                    class="btn btn-success">
                                                     <i class='fas fa-pencil'></i> [[#{accion.actualizar}]]
                                                 </a>
@@ -118,7 +118,7 @@
                         <form th:action="@{/carrito/guardar}"
                               method="post"
                               th:object="${item}">
-                            <input type="hidden" name="idPaquete" th:field="*{idPaquete}"/>
+                            <input type="hidden" name="IdPaquete" th:field="*{IdPaquete}"/>
                             <div class="form-group">
                                 <label for="cantidad">[[#{carrito.cantidad}]]:</label>
                                 <input type="number" name="cantidad" th:field="*{cantidad}" 
@@ -128,7 +128,7 @@
                                     <i class='fas fa-save'></i> [[#{accion.guardar}]]</button>
                             </div>
                         </form>
-                        <a th:href="@{/carrito/eliminar/}+${item.idPaquete}"
+                        <a th:href="@{/carrito/eliminar/}+${item.IdPaquete}"
                            class="btn btn-danger">
                             <i class='fas fa-trash'></i> [[#{accion.eliminar}]]
                         </a>
