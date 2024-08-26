@@ -16,7 +16,7 @@ public class CarritoController {
     @Autowired
     private ItemService itemService;
     @Autowired
-    private PaquetesService productoService;
+    private PaquetesService paqueteService;
 
     //Para ver el carrito
     @GetMapping("/carrito/listado")
@@ -32,13 +32,13 @@ public class CarritoController {
         return "/carrito/listado";
     }    
    
-    //Para Agregar un producto al carrito
+    //Para Agregar un paquete al carrito
     @GetMapping("/carrito/agregar/{idPaquetes}")
     public ModelAndView agregarItem(Model model, Item item) {
         Item item2 = itemService.get(item);
         if (item2 == null) {
-            Paquetes producto = productoService.getPaquetes(item);
-            item2 = new Item(producto);
+            Paquetes paquete = paqueteService.getPaquetes(item);
+            item2 = new Item(paquete);
         }
         itemService.save(item2);
         var lista = itemService.gets();
@@ -54,7 +54,7 @@ public class CarritoController {
         return new ModelAndView("/carrito/fragmentos :: verCarrito");
     }
 
-    //Para mofificar un producto del carrito
+    //Para mofificar un paquete del carrito
     @GetMapping("/carrito/modificar/{idPaquetes}")
     public String modificarItem(Item item, Model model) {
         item = itemService.get(item);
@@ -69,14 +69,14 @@ public class CarritoController {
         return "redirect:/carrito/listado";
     }
 
-    //Para actualizar un producto del carrito (cantidad)
+    //Para actualizar un paquete del carrito (cantidad)
     @PostMapping("/carrito/guardar")
     public String guardarItem(Item item) {
         itemService.update(item);
         return "redirect:/carrito/listado";
     }
 
-    //Para facturar los productos del carrito... no implementado...
+    //Para facturar los paquetes del carrito... no implementado...
     @GetMapping("/facturar/carrito")
     public String facturarCarrito() {
         itemService.facturar();
