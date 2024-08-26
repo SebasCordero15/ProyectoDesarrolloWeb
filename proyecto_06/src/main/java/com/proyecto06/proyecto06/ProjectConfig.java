@@ -98,8 +98,6 @@ public class ProjectConfig implements WebMvcConfigurer {
                         "/pasajeros/modificar/**","/pasajeros/eliminar/**",
                         "/contacto/nuevo","/contacto/guardar",
                         "/contacto/modificar/**","/contacto/eliminar/**",
-                        "/pagos/nuevo","/pagos/guardar",
-                        "/pagos/modificar/**","/pagos/eliminar/**",
                         "/vuelos/nuevo","/vuelos/guardar",
                         "/vuelos/modificar/**","/vuelos/eliminar/**",
                         "/usuario/nuevo","/usuario/guardar",
@@ -114,7 +112,6 @@ public class ProjectConfig implements WebMvcConfigurer {
                         "/pasajeros/listado",
                         "/vuelos/listado",
                         "/contacto/listado",
-                        "/pagos/listado",
                         "/usuario/listado"
                 ).hasAnyRole("ADMIN","VENDEDOR")
                 .requestMatchers("/facturar/carrito")
