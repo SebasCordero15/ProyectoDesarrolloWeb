@@ -48,7 +48,7 @@
                                     <input type="text" class="form-control" name="idReserva" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="descripcion">[[#{reserva.idVuelo}]]</label>
+                                    <label for="idVuelo">[[#{reserva.idVuelo}]]</label>
                                     <input type="text" class="form-control" name="idvuelo" required="true"/>
                                 </div>
                                 <div class="mb-3">
@@ -97,7 +97,7 @@
                                     <tbody>
                                         <tr th:each="reserva : ${reservas}">
                                             <td>[[${reserva.idReserva}]]</td>
-                                            <td>[[${reserva.vuelos.codigoVuelo}]]</td>
+                                            <td>[[${reserva.idVuelo}]]</td>
                                             <td>[[${reserva.descripcion}]]</td>
                                             <td>[[${reserva.activo}]]</td> 
                                             

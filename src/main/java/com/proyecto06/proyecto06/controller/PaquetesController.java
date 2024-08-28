@@ -56,13 +56,13 @@ public class PaquetesController {
         return "redirect:/paquetes/listado";
     }
 
-    @GetMapping("/eliminar/{idPaquetes}")
+    @GetMapping("/eliminar/{idPaquete}")
     public String eliminar(Paquetes paquetes) {
         paquetesService.delete(paquetes);
         return "redirect:/paquetes/listado";
     }
 
-    @GetMapping("/modificar/{idPaquetes}")
+    @GetMapping("/modificar/{idPaquete}")
     public String modificar(Paquetes paquetes, Model model) {
         paquetes = paquetesService.getPaquetes(paquetes);
         model.addAttribute("paquetes", paquetes);

@@ -21,12 +21,10 @@ public class Checkin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private Long idCheckin;
+    private Long idReserva;
     private String fechaCheckin;
     private String estado;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id_reserva")
-    private Reserva reserva;
 }
 
