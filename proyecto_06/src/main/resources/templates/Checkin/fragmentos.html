@@ -88,7 +88,7 @@
                                     <tbody>
                                         <tr th:each="checkin : ${checkin}">
                                            
-                                            <td>[[${checkin.reserva.idReserva}]]</td>
+                                            <td>[[${checkin.idReserva}]]</td>
                                             <td>[[${checkin.fechaCheckin}]]</td>
                                             <th>[[#{checkin.estado}]]</th>
                                             
@@ -140,31 +140,28 @@
                                             </div>
                                             <div class="card-body">
                                                  <div class="mb-3">
-                                                    <label for="descripcion">[[#{checkin.idCheckin}]]</label>
+                                                    <label for="idCheckin">[[#{checkin.idCheckin}]]</label>
                                                     <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
+                                                           name="idCheckin" th:field="*{idCheckin}"
                                                            required="true">
                                                 </div>
                                                  <div class="mb-3">
-                                                    <label for="descripcion">[[#{checkin.fechaCheckin}]]</label>
+                                                    <label for="idReserva">[[#{checkin.idReserva}]]</label>
                                                     <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
+                                                           name="idReserva" th:field="*{idReserva}"
                                                            required="true">
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="descripcion">[[#{checkin.nacionalidad}]]</label>
+                                                 <div class="mb-3">
+                                                    <label for="fechaCheckin">[[#{checkin.fechaCheckin}]]</label>
                                                     <input type="text" class="form-control" 
-                                                           name="descripcion" th:field="*{descripcion}"
+                                                           name="fechaCheckin" th:field="*{fechaCheckin}"
                                                            required="true">
                                                 </div>
-                                              
-                                                <div class="mb-3">
-                                                    <label for="activo">[[#{checkin.activo}]]</label>
-                                                    <input class="form-check-input" 
-                                                           type="checkbox" 
-                                                           name="activo" 
-                                                           id="activo"
-                                                           th:field="*{activo}">
+                                                 <div class="mb-3">
+                                                    <label for="estado">[[#{checkin.estado}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="estado" th:field="*{estado}"
+                                                           required="true">
                                                 </div>
                                             </div>
                                         </div>

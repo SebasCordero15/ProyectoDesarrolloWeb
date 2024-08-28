@@ -38,13 +38,13 @@ public class VuelosController {
         return "redirect:/vuelos/listado";
     }
     
-    @GetMapping("/eliminar/{idVuelos}")
+    @GetMapping("/eliminar/{idVuelo}")
     public String eliminar(Vuelos vuelos) {
         vuelosService.delete(vuelos);
         return "redirect:/vuelos/listado";
     }
 
-    @GetMapping("/modificar/{idVuelos}")
+    @GetMapping("/modificar/{idVuelo}")
     public String modificar(Vuelos vuelos, Model model) {
         vuelos = vuelosService.getVuelos(vuelos);
         model.addAttribute("vuelos", vuelos);

@@ -19,12 +19,12 @@ public class Reserva implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReserva;
-    //private Long idVuelo;
+    private String idVuelo;
     private String descripcion;
     private String rutaImagen;
     private boolean activo;
  
-    @ManyToOne
-    @JoinColumn(name = "id_vuelo")
-    private Vuelos vuelos;
+    //@ManyToOne
+    //@JoinColumn(name = "id_vuelo")
+    //private Vuelos vuelos;
 }

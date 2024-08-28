@@ -1,0 +1,30 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.navbar-dark {
+    background-color: #2980b9;
+}
+.navbar-toggler {
+    border: 1px solid #ffffff;
+}
+.navbar-nav .nav-item {
+    margin-right: 1rem;
+}
+
+
+footer {
+    background-color: #e5e7e9;
+    color: #f8f9fa;
+    border-top: 2px solid #ffffff;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+}
+.btn-white {
+    background-color: #ffffff;
+    color: #212529;
+    border: 1px solid #dee2e6;
+}
+.btn-white:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+}
