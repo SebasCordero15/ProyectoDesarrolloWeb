@@ -99,22 +99,33 @@
                     <div class="card destino" th:each="p : ${paquetes}">
 
                         <img th:src="${p.rutaImagen}" class="imagenDestino"/>
+                        <figcaption class="d-flex justify-content-evenly">
+
+                            <div>
+                                ¢[[${p.precio}]] ([[${p.existencias}]])
+                            </div>
+                            <div class="card-body">
+                                <h4>[[${p.descripcion}]]</h4>
 
 
+                                <p>[[${p.detalle}]]. (Existencias: [[${p.existencias}]])</p>
 
-                        <div class="card-body">
-                            <h4>[[${p.descripcion}]]</h4>
+                            </div>
 
-
-                            <p>[[${p.detalle}]]. (Existencias: [[${p.existencias}]])</p>
-                            
-                        </div>
-
-                        <div class="botonera">
-                            <button class="boton botonCompra">Comprar</button>
-                            <button class="boton botonReserva">Reservar</button>
-                        </div>
+                            <div class="botonera">
+                                <form>
+                                    <input type="hidden" name="texto" th:value="${p.idPaquete}"/>
+                                    <input type="hidden" name="texto" th:value="${p.existencias}"/>
+                                    <button class="boton botonCompra" id="addCar" name="addCar" onclick="addCart(this.form)" 
+                                            type="button"><i class="fas fa-cart-plus"></i>Comprar</button>
+                                </form>
+                            </div>
+                        </figcaption>
+                        <figcaption class="d-flex justify-content-evenly">
+                        <button class="boton botonReserva">Reservar</button>
+                        </figcaption>
                     </div>
+                </div>
 
                 </div>
             </section>

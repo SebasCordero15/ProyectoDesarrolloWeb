@@ -33,7 +33,7 @@ public class CarritoController {
     }    
    
     //Para Agregar un paquete al carrito
-    @GetMapping("/carrito/agregar/{idPaquetes}")
+    @GetMapping("/carrito/agregar/{idPaquete}")
     public ModelAndView agregarItem(Model model, Item item) {
         Item item2 = itemService.get(item);
         if (item2 == null) {
@@ -55,7 +55,7 @@ public class CarritoController {
     }
 
     //Para mofificar un paquete del carrito
-    @GetMapping("/carrito/modificar/{idPaquetes}")
+    @GetMapping("/carrito/modificar/{idPaquete}")
     public String modificarItem(Item item, Model model) {
         item = itemService.get(item);
         model.addAttribute("item", item);
@@ -63,7 +63,7 @@ public class CarritoController {
     }
 
     //Para eliminar un elemento del carrito
-    @GetMapping("/carrito/eliminar/{idPaquetes}")
+    @GetMapping("/carrito/eliminar/{idPaquete}")
     public String eliminarItem(Item item) {
         itemService.delete(item);
         return "redirect:/carrito/listado";
