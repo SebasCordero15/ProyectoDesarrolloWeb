@@ -15,10 +15,10 @@
             <style>
                 body {
                     font-family: 'Roboto', sans-serif;
-                    background-repeat: repeat-y;
-                    background-size: contain;
+                    background-repeat: no-repeat; /* Evita que la imagen se repita */
+                    background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
                     background-image: url('https://i0.wp.com/pune.news/wp-content/uploads/2023/06/Airline.webp?resize=800%2C450&ssl=1');
-                    background-position: 50% 0;
+                    background-position: center center; /* Centra la imagen en la pantalla */
                 }
 
                 header{
@@ -69,7 +69,6 @@
                     min-height: 100vh;
 
                     -webkit-backdrop-filter: blur(15px);
-                    backdrop-filter: blur(15px);
                     background-color: rgba(255, 255, 255, 0.4);
 
                 }
