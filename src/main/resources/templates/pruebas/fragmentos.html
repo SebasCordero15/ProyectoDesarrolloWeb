@@ -112,17 +112,14 @@
 
                             </div>
 
-                            <div class="botonera">
+                            <div>
                                 <form>
                                     <input type="hidden" name="texto" th:value="${p.idPaquete}"/>
                                     <input type="hidden" name="texto" th:value="${p.existencias}"/>
-                                    <button class="boton botonCompra" id="addCar" name="addCar" onclick="addCart(this.form)" 
-                                            type="button"><i class="fas fa-cart-plus"></i>Comprar</button>
+                                    <button class="btn btn-ligth" id="addCar" name="addCar" onclick="addCart(this.form)" 
+                                            type="button"><i class="fas fa-cart-plus"></i> Comprar</button>
                                 </form>
                             </div>
-                        </figcaption>
-                        <figcaption class="d-flex justify-content-evenly">
-                        <button class="boton botonReserva">Reservar</button>
                         </figcaption>
                     </div>
                 </div>

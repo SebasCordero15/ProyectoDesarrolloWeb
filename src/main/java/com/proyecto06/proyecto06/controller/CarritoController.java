@@ -4,6 +4,7 @@ package com.proyecto06.proyecto06.controller;
 import com.proyecto06.proyecto06.domain.*;
 import com.proyecto06.proyecto06.services.ItemService;
 import com.proyecto06.proyecto06.services.PaquetesService;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,12 @@ public class CarritoController {
     @GetMapping("/carrito/listado")
     public String inicio(Model model) {
         var items = itemService.gets();
+        
+       // Verificar si la lista de items es null, y si lo es, inicializarla como una lista vacía
+        if (items == null) {
+            items = new ArrayList<>();
+        }
+        
         model.addAttribute("items", items);
         var carritoTotalVenta = 0;
         for (Item i : items) {
