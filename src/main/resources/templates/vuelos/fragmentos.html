@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!--Esta es la primera pagina html-->
+<!-- Son etiquetas extendias -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http//www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}"
+          <title>Proyecto06</title>
+        <meta charset="UTF-8"/> 
+
+    </head>
+    <body>
+
+        <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarVuelos">
+                            <i class="fas fa-plus"></i> [[#{vuelos.agregar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2 Fragmento para agregar vuelos, es la ventana modal -->
+        <section th:fragment="agregarVuelos">
+            <div id="agregarVuelos" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">[[#{vuelos.agregar}]]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/vuelos/guardar}" th:object="${vuelos}"
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="idVuelo">[[#{vuelos.idVuelo}]]</label>
+                                    <input type="text" class="form-control" name="idVuelo" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="codigoVuelo">[[#{vuelos.codigoVuelo}]]</label>
+                                    <input type="text" class="form-control" name="codigoVuelo" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="origen">[[#{vuelos.origen}]]</label>
+                                    <input type="text" class="form-control" name="origen" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="destino">[[#{vuelos.destino}]]</label>
+                                    <input type="text" class="form-control" name="destino" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fechaSalida">[[#{vuelos.fechaSalida}]]</label>
+                                    <input type="text" class="form-control" name="fechaSalida" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fechaLlegada">[[#{vuelos.fechaLlegada}]]</label>
+                                    <input type="text" class="form-control" name="fechaLlegada" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="precio">[[#{vuelos.precio}]]</label>
+                                    <input type="text" class="form-control" name="precio" required="true"/>
+                                </div>
+                               
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 Sección principal para mostrar la informaccion de la entidad vuelos -->
+        <section th:fragment="listadoVuelos" id="vuelos">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{vuelos.listado}]]</h4>
+                            </div>
+                            <div th:if="${vuelos != null and !vuelos.empty}">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr><th>#</th>
+                                           
+                                            <th>[[#{vuelos.codigoVuelo}]]</th>
+                                            <th>[[#{vuelos.origen}]]</th>
+                                            <th>[[#{vuelos.destino}]]</th>
+                                            <th>[[#{vuelos.fechaSalida}]]</th>
+                                            <th>[[#{vuelos.fechaLlegada}]]</th>
+                                            <th>[[#{vuelos.precio}]]</th>
+                                      
+                                            
+                                            <th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="vuelos : ${vuelos}">
+                                            <td style="text-align: right">[[${vuelos.idVuelo}]]</td>
+                                            <td style="text-align: right">[[${vuelos.codigoVuelo}]]</td>
+                                            <td style="text-align: right">[[${vuelos.origen}]]</td>
+                                            <td style="text-align: right">[[${vuelos.destino}]]</td>
+                                            <td style="text-align: right">[[${vuelos.fechaSalida}]]</td>
+                                            <td style="text-align: right">[[${vuelos.fechaLlegada}]]</td>
+                                            <td style="text-align: right">[[${vuelos.precio}]]</td>
+                                            <td><a th:href="@{/vuelos/eliminar/}+${vuelos.idVuelo}"
+                                                   class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
+                                                <a th:href="@{/vuelos/modificar/}+${vuelos.idVuelo}"
+                                                   class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${vuelos == null or vuelos.empty}">
+                                <span>[[#{lista.vacia}]]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-warning text-black mb-3">
+                            <div class="card-body">
+                                <h3>[[#{vuelos.total}]]</h3>
+                                <h4 class="fs-2"><i class="fa-solid fa-plane"></i> [[${totalVuelos}]]</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4 Fragmento que se utiliza en la página modifca.html -->
+        <section th:fragment="editarVuelos">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST"
+                          th:action="@{/vuelos/guardar}" 
+                          th:object="${vuelos}"
+                          class="was-validated"                          
+                          enctype="multipart/form-data">
+                        <input type="hidden" name="idVuelo" th:field="*{idVuelo}"/>
+                        <section th:replace="~{vuelos/fragmentos :: botonesEditar}"/>
+                        <div id=details>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>[[#{accion.actualizar}]]</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="idVuelo">[[#{vuelos.idVuelo}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="idVuelo" th:field="*{idVuelo}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="codigoVuelo">[[#{vuelos.codigoVuelo}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="codigoVuelo" th:field="*{codigoVuelo}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="origen">[[#{vuelos.origen}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="origen" th:field="*{origen}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="destino">[[#{vuelos.destino}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="destino" th:field="*{destino}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="fechaSalida">[[#{vuelos.fechaSalida}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="fechaSalida" th:field="*{fechaSalida}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="fechaLlegada">[[#{vuelos.fechaLlegada}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="fechaLlegada" th:field="*{fechaLlegada}"
+                                                           required="true">
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
+        <section th:fragment="botonesEditar">
+            <div class="container py-4 mb-4 bg-light">
+                <div class="row">
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/vuelos/listado}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">                                
+                        <a th:href="@{/vuelos/eliminar/}+${vuelos.idVuelos}"
+                           class="btn btn-danger">
+                            <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <title>Proyecto06</title>
+        <meta charset="UTF-8" />
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+        <script src="/js/rutinas.js" type="text/javascript"></script>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+            <style>
+                body {
+                    font-family: 'Roboto', sans-serif;
+                    background-repeat: repeat-y;
+                    background-size: contain;
+                    background-image: url('https://i0.wp.com/pune.news/wp-content/uploads/2023/06/Airline.webp?resize=800%2C450&ssl=1');
+                    background-position: 50% 0;
+                }
+
+                header{
+                    width: 100%;
+                }
+
+                .navbar-dark {
+                    background-color: #ffd000;
+                }
+
+                .nav-link{
+                    color: #000000;
+                }
+
+                .navbar-toggler {
+                    border: 1px solid #ffffff;
+                }
+
+                .navbar-nav .nav-item {
+                    margin-right: 1rem;
+                }
+
+                footer {
+                    background-color: #ffd000;
+                    color: #000000;
+                    border-top: 2px solid #ffffff;
+                    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+                    padding: 1rem 0;
+                    width: 100%;
+                }
+
+                .btn-white {
+                    background-color: #ffffff;
+                    color: #ffd000;
+                    border: 1px solid #ffd000;
+                }
+
+                .btn-white:hover {
+                    background-color: #f8f9fa;
+                    color: #ffd000;
+                }
+
+                main{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    min-height: 100vh;
+
+                    -webkit-backdrop-filter: blur(15px);
+                    backdrop-filter: blur(15px);
+                    background-color: rgba(255, 255, 255, 0.4);
+
+                }
+
+                .searchTitle{
+                    font-size: 2rem;
+                    justify-content: center;
+                    display: flex;
+                    margin-top: 30px;
+                }
+
+                .main-header{
+                    background: white;
+                }
+
+                .destino{
+                    border-radius: 2rem;
+                    display: flex;
+                    flex-direction: row;
+                    margin-top: 30px;
+                    padding: 2rem 3rem;
+                    border-color: black;
+                }
+
+                .destino:last-child{
+                    margin-bottom: 30px;
+                }
+
+                .imagenDestino{
+                    height: 100px;
+                    width: 150px;
+                    border-radius: 0.5rem;
+                }
+
+                .innerContainer{
+
+                    max-width: min(100%, 1140px);
+                }
+
+                .botonera{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                }
+
+                .boton{
+                    border: unset;
+                    border-radius: .5rem;
+                    padding: .5rem 1rem;
+                }
+
+                .botonCompra:hover{
+                    background-color: green;
+                    color: white;
+                }
+
+                .botonReserva:hover{
+                    background-color: lightsalmon;
+                    color: white;
+                }
+
+
+
+            </style>
+    </head>
+    <body>
+
+        <header th:fragment="header" class="header">
+            <nav class="navbar navbar-expand-sm navbar-dark">
+                <div class="container">
+                    <a th:href="@{/}" class="navbar-brand">[[#{aplicacion.titulo}]]</a>
+                    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <ul class="navbar-nav">
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/reserva/listado}">[[#{plantilla.reservas}]]</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/vuelos/listado}">[[#{plantilla.vuelos}]]</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/checkin/listado}">[[#{plantilla.checkin}]]</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/paquetes/listado}">[[#{plantilla.paquetes}]]</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/categoria/listado}">[[#{plantilla.categoria}]]</a></li>
+                            <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a class="nav-link dropdown-toggle" 
+                                   data-bs-toggle="dropdown" 
+                                   href="#" 
+                                   role="button" 
+                                   aria-expanded="false">[[#{plantilla.pruebas}]]</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item"  th:href="@{/contacto/listado}">[[#{plantilla.contacto}]]</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/usuario/listado}">[[#{plantilla.usuario}]]</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">[[#{plantilla.idioma}]]</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" th:href="@{/(lang=es)}">ES</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/(lang=en)}">EN</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
+                            <li class="nav-item px-2">
+                                <a class="nav-menu-link nav-link" th:href="@{/login}">
+                                    <i class="fas fa-right-to-bracket"></i>     
+                                </a> 
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav" sec:authorize="isAuthenticated()">
+                            <li class="nav-item text-white my-auto">
+                                <img th:src="@{${session.usuarioImagen}}"
+                                     class="rounded-circle"
+                                     height="40"
+                                     alt="alt"/>
+                                <span sec:authentication="name">Jhon</span>
+                            </li>    
+                            <li class="nav-item text-white my-auto">
+                                <form method="post" th:action="@{/logout}">
+                                    <button class="btn btn-white">
+                                        <i class="fas fa-right-from-bracket"></i> 
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <section class="py-2 main-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1><i class="fas fa-plane"></i> Bienvenido a DESTINOS TV</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </header>       
+
+        <footer th:fragment="footer">
+            <div class="container">
+                <p class="lead text-center">
+                    &COPY; [[#{plantilla.derechos}]] 
+                </p>
+            </div>
+        </footer>
+
+    </body>
+</html>

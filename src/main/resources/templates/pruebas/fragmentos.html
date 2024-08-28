@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--Esta es la primera pagina html-->
+<!-- Son etiquetas extendias -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http//www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>TechShopcito</title>
+        <meta charset="UTF-8"/> 
+    </head>
+    <body>
+
+        <main>
+            <!-- 1 Sección para crear los tabs de categorias-->
+            <section th:fragment="tabsCategorias" class="bg-light">
+                <div class="row p-4">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link " href="/paquetes/listado">[[#{paquetes.todas}]]</a>
+                        </li>
+                        <li class="nav-item" th:each="c : ${categorias}">
+                            <a class="nav-link" 
+                               th:href="@{/paquetes/listado/} + ${c.idCategoria}">[[${c.descripcion}]]</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3 Sección para mostrar los filtros de los paquetes-->        
+            <section th:fragment="filtros" class="m-2">
+                <div class="card p-2">
+                    <form method="post"
+                          th:action="@{/paquetes/listado}">                     
+                        <div class="card-body">
+                            <div class="row g-2"> <!-- Añadimos 'row' para organizar en filas y 'g-2' para el espacio entre columnas -->
+                                <div class="col-md">
+                                    <label for="ubicacion">[[#{filtro.ubicacion}]]</label> 
+                                    <input type="text" 
+                                           class="form-control"
+                                           th:value="${ubicacion}"
+                                           th:name="ubicacion"
+                                           id="ubicacion"
+                                           placeholder="Ej. Nueva York"
+                                           required="true"/>
+                                </div>                           
+                                <div class="col-md">
+                                    <label for="fechaSalida">[[#{filtro.fechaSalida}]]</label> 
+                                    <input type="date" 
+                                           class="form-control"
+                                           th:value="${fechaSalida}"
+                                           th:name="fechaSalida"
+                                           id="fechaSalida"
+                                           required="true"/>
+                                </div>  
+                                <div class="col-md">
+                                    <label for="fechaLlegada">[[#{filtro.fechaLlegada}]]</label> 
+                                    <input type="date" 
+                                           class="form-control"
+                                           th:value="${fechaLlegada}"
+                                           th:name="fechaLlegada"
+                                           id="fechaLlegada"
+                                           required="true"/>
+                                </div>
+                                <div class="col-md">
+                                    <label for="cantidadPersonas">[[#{filtro.cantidadPersonas}]]</label> 
+                                    <input type="number" 
+                                           class="form-control"
+                                           th:value="${cantidadPersonas}"
+                                           th:name="cantidadPersonas"
+                                           id="cantidadPersonas"
+                                           placeholder="Ej. 2"
+                                           min="1"
+                                           required="true"/>
+                                </div>
+
+                                <button type="submit"
+                                        class="btn btn-warning">
+                                    <i class="fas fa-magnifying-glass"></i> [[#{boton.buscar}]]
+                                </button>
+                            </div>
+
+
+                        </div>
+
+
+                    </form>
+                </div>
+            </section>
+
+
+            <!-- 2 Sección para mostrar las tarjetas de los paquetes-->
+            <section th:fragment="tarjetas" class="tarjetas">
+                <div class="searchTitle">                
+                    <span>Busqueda de Destinos</span>
+                </div>
+                <div class="row">
+                    <div class="card destino" th:each="p : ${paquetes}">
+
+                        <img th:src="${p.rutaImagen}" class="imagenDestino"/>
+
+
+
+                        <div class="card-body">
+                            <h4>[[${p.descripcion}]]</h4>
+
+
+                            <p>[[${p.detalle}]]. (Existencias: [[${p.existencias}]])</p>
+                            
+                        </div>
+
+                        <div class="botonera">
+                            <button class="boton botonCompra">Comprar</button>
+                            <button class="boton botonReserva">Reservar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </body>
+</html>
+
